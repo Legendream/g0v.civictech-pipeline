@@ -27,6 +27,7 @@
 
 Astro 產生靜態頁，部署在 Cloudflare Workers（靜態檔由 Workers 直接送出，
 設定在 `wrangler.jsonc`），留言區用 D1 加 Turnstile。
+後台那幾格設定與踩過的坑寫在 `docs/部署設定.md`。
 
 ## 語言
 

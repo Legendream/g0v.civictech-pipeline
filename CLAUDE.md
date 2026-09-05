@@ -17,11 +17,17 @@ commit 就是發布，而且留在 git 歷史裡清不掉。
 
 ## 三個 repo 的分工
 
-| repo | 放什麼 |
-|---|---|
-| 這裡 | 網站本體：敘事、頁面、留言區 |
-| `Taiwan-civic-tech-research` | 問卷分析報告的正本 |
-| `AI-Writing-Skill` | 寫作方法資產的正本（SKILL、模板、驗收清單） |
+本機資料夾名跟 repo 名不一定一樣，**認 repo 名不要認資料夾名**：
+
+| 本機資料夾 | repo | 放什麼 |
+|---|---|---|
+| `~/Claude/g0v.civictech-pipeline` | `g0v.civictech-pipeline`（這裡） | 網站本體：敘事、頁面、留言區 |
+| `~/Claude/g0v civic tech guide` | `Taiwan-civic-tech-research` | 問卷分析報告的正本 |
+| `~/Claude/AI Writing Pipeline` | `AI-Writing-Skill` | 寫作方法資產的正本（SKILL、模板、驗收清單） |
+
+那兩個舊資料夾的名字**不要為了整齊去改**：Claude Code 的專案記憶與對話紀錄
+綁在資料夾路徑上（`~/.claude/projects/<路徑轉出來的目錄>/`），改名會讓它們對不上。
+git 不在乎資料夾叫什麼，但那一層在乎。
 
 **正本只有一份。** 這個站對報告與流程只做導讀與連結，不複製全文。
 複製會分岔，然後兩個版本說不一樣的話，而且你不會記得回頭改。

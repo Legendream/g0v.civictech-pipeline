@@ -25,7 +25,8 @@
 
 ## 技術（規劃，尚未實作）
 
-Astro 產生靜態頁，部署在 Cloudflare Pages，留言區用 D1 加 Turnstile。
+Astro 產生靜態頁，部署在 Cloudflare Workers（靜態檔由 Workers 直接送出，
+設定在 `wrangler.jsonc`），留言區用 D1 加 Turnstile。
 
 ## 語言
 

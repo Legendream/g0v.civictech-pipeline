@@ -1,0 +1,24 @@
+{
+  // Cloudflare Workers 的部署設定。
+  // 這個站是純靜態的：Astro 把五頁 build 成 HTML 放進 dist/，
+  // Workers 只負責把 dist/ 裡的檔案送出去，沒有伺服器端程式。
+  //
+  // name 會決定 Cloudflare 給的預設網址（civictech-pipeline.workers.dev），
+  // 建立之後改不了，所以不要隨手改這一行。
+  "name": "civictech-pipeline",
+
+  // 決定這個 Worker 用哪一版的執行環境。往後調會拿到新行為，
+  // 沒事不要動；要動請確認過那一版的變更說明。
+  "compatibility_date": "2026-09-05",
+
+  "assets": {
+    "directory": "./dist",
+
+    // 找不到的網址回傳 404.html（由 src/pages/404.md 產生），
+    // 而不是丟一頁 Cloudflare 的預設錯誤畫面。
+    "not_found_handling": "404-page"
+  }
+
+  // 批次三加留言區時，D1 的 binding 加在這裡。
+  // 資料表結構已經先寫在 db/schema.sql。
+}

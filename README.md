@@ -1,6 +1,6 @@
 # 臺灣公民科技行動指引
 
-網站原始碼。上線網址：`https://civictech.claire-cheng.com`（尚未上線）
+網站原始碼。上線網址：`https://civictech-guide.claire-cheng.com`（尚未上線）
 
 **狀態**：地基建置中，2026-09-05 開工。
 

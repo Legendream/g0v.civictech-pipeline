@@ -3,9 +3,10 @@
   // 這個站是純靜態的：Astro 把五頁 build 成 HTML 放進 dist/，
   // Workers 只負責把 dist/ 裡的檔案送出去，沒有伺服器端程式。
   //
-  // name 會決定 Cloudflare 給的預設網址（civictech-pipeline.workers.dev），
-  // 建立之後改不了，所以不要隨手改這一行。
-  "name": "civictech-pipeline",
+  // 這個名字必須跟 Cloudflare 上那個 Worker 的名字一模一樣，
+  // 否則 wrangler deploy 會另外生一個新的 Worker 出來。
+  // Worker 建立之後改不了名，所以這裡也不要動。
+  "name": "g0v-civictech-pipeline",
 
   // 決定這個 Worker 用哪一版的執行環境。往後調會拿到新行為，
   // 沒事不要動；要動請確認過那一版的變更說明。

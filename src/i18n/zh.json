@@ -1,0 +1,12 @@
+{
+  "siteName": "臺灣公民科技行動指引",
+  "nav": [
+    { "path": "", "label": "首頁" },
+    { "path": "why", "label": "為什麼" },
+    { "path": "pipeline", "label": "這套流程" },
+    { "path": "start", "label": "怎麼開始" }
+  ],
+  "aboutLabel": "關於這個網站",
+  "skipToContent": "跳到主要內容",
+  "placeholderNotice": "這一頁還是佔位內容，正式文案在批次二寫。"
+}

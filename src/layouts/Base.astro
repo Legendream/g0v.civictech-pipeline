@@ -1,0 +1,123 @@
+---
+// 全站共用版型。
+// 規矩：介面字串一律從 src/i18n/<語言>.json 取，不要寫死在這個檔裡。
+// 配色沿用舊站 write.claire-cheng.com 的那一套，讀者看得出是同一件事的延續。
+import { getLocaleFromPath, getStrings, swapLocale, htmlLang, LOCALES } from '../i18n/index.js';
+
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title ?? Astro.props.title ?? '';
+const description = frontmatter?.description ?? Astro.props.description ?? '';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = getStrings(locale);
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const navItems = t.nav.map((item) => ({
+  label: item.label,
+  // 一律帶結尾斜線，跟 Astro 產出的網址（/zh/why/）一致：
+  // 少了它 aria-current 比不到，而且每次點擊都會多吃一次轉址
+  href: `/${locale}/${item.path}/`.replace(/\/+$/, '/'),
+}));
+const aboutHref = `/${locale}/about/`;
+const isPlaceholder = frontmatter?.placeholder === true;
+---
+<!doctype html>
+<html lang={htmlLang(locale)}>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title} | {t.siteName}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{LOCALES.map((l) => (
+  <link
+    rel="alternate"
+    hreflang={htmlLang(l)}
+    href={new URL(swapLocale(Astro.url.pathname, l), Astro.site).href}
+  />
+))}
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<style>
+  :root {
+    --bg: #fbfaf8;
+    --bg-card: #ffffff;
+    --text: #1f2320;
+    --text-dim: #5a6058;
+    --border: #e1ddd4;
+    --accent: #2f6f4f;
+    --accent-bg: #eaf3ec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #191a17;
+      --bg-card: #222420;
+      --text: #eceae4;
+      --text-dim: #a3a89e;
+      --border: #383a34;
+      --accent: #6fbf94;
+      --accent-bg: #223028;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC",
+                 "Microsoft JhengHei", system-ui, sans-serif;
+    line-height: 1.75;
+    font-size: 17px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+  header { border-bottom: 1px solid var(--border); }
+  header .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; padding-block: 16px; }
+  .site-name { font-weight: 600; color: var(--text); text-decoration: none; }
+  nav { display: flex; gap: 16px; flex-wrap: wrap; }
+  nav a { color: var(--text-dim); text-decoration: none; font-size: 0.95rem; }
+  nav a:hover, nav a[aria-current="page"] { color: var(--accent); }
+  main { padding: 40px 0 80px; }
+  h1 { font-size: 1.7rem; line-height: 1.5; margin: 0 0 16px; }
+  h2 { font-size: 1.25rem; margin: 48px 0 12px; padding-top: 8px; border-top: 1px solid var(--border); }
+  p { margin: 0 0 14px; }
+  a { color: var(--accent); }
+  .notice {
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--text-dim);
+    font-size: 0.92rem;
+  }
+  footer { border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.9rem; }
+  footer .wrap { padding-block: 24px; }
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { position: static; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">{t.skipToContent}</a>
+<header>
+  <div class="wrap">
+    <a class="site-name" href={`/${locale}/`}>{t.siteName}</a>
+    <nav>
+      {navItems.map((item) => (
+        <a href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>{item.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <slot />
+    {isPlaceholder && <p class="notice">{t.placeholderNotice}</p>}
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <a href={aboutHref}>{t.aboutLabel}</a>
+  </div>
+</footer>
+</body>
+</html>

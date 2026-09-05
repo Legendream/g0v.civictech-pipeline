@@ -12,6 +12,13 @@
   // 沒事不要動；要動請確認過那一版的變更說明。
   "compatibility_date": "2026-09-05",
 
+  // 自訂網域。寫在這裡而不是在後台點，有兩個好處：
+  // 部署時 wrangler 會自己建立網域與 DNS 記錄，不必依賴介面；
+  // 而且「這個站掛在哪個網址」變成版控的一部分，看 repo 就知道。
+  "routes": [
+    { "pattern": "civictech-guide.claire-cheng.com", "custom_domain": true }
+  ],
+
   "assets": {
     "directory": "./dist",
 

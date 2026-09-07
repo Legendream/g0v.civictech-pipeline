@@ -1,10 +1,56 @@
 ---
 layout: ../../layouts/Base.astro
 title: 關於這個網站
-description: 誰做的、誰出資、授權、留言政策
-placeholder: true
+description: 專案發起背景、合作夥伴、CC BY 4.0 開源授權聲明與原始碼正本位置。
 ---
 
-# 關於這個網站
+# 關於本專案
 
-誰做的、誰出資、授權、留言政策。
+## 專案發起與合作夥伴
+
+本專案由 g0v 揪松團與 Claire Cheng 共同合作推動，屬於「臺灣公民科技專案與工具行動指引」專案成果，問卷研究與寫作流程皆由鄭婷宇（Claire Cheng）執行。
+
+專案包含兩大核心成果：前半段為社群參與現況問卷研究，後半段為標準化的人機協同寫作流程。兩者之關聯與研究發現詳見[為什麼要做這個](/zh/why/)。
+
+## 開源授權條款
+
+本套協作流程以 **CC BY 4.0（姓名標示 4.0 國際）** 授權條款釋出，由 g0v 揪松團與 Claire Cheng 共同支持產製。
+
+使用、修改或散布本專案內容時，請標註：
+```text
+CC BY 4.0, by g0v jothon & Claire Cheng
+```
+
+授權範圍是本案交付驗收的版本，後續獨立開發的版本不在本次授權範圍內。著作權人保留基於本內容持續開發、修改及另行運用之權利。
+
+## 原始資料與正本倉庫
+
+為確保資訊同步並避免版本分歧，本網站僅提供導讀與結構指引。各項原始內容請查閱對應官方倉庫：
+
+| 內容項目 | 官方正本倉庫 |
+|---|---|
+| 本網站原始碼 | [g0v.civictech-pipeline](https://github.com/Legendream/g0v.civictech-pipeline) |
+| 研究報告、分析程式與圖表資料 | [Taiwan-civic-tech-research](https://github.com/Legendream/Taiwan-civic-tech-research)（網頁版：[report.claire-cheng.com](https://report.claire-cheng.com/)） |
+| 寫作流程本體、範本與驗收清單 | [AI-Writing-Skill](https://github.com/Legendream/AI-Writing-Skill) |
+
+**問卷資料隱私說明**：為保障填答者匿名性，原始問卷填答紀錄不對外公開。由於組織名稱、專案描述、專案階段與困擾評分等欄位組合後，在規模較小的公民科技社群中仍可能指認出特定個人，因此去識別化後的統計數據與分析程式已公開於研究報告倉庫中；未來可公開之原始資料則由 g0v 揪松團自行評估決定是否發布。
+
+## 網站架構與隱私設計
+
+- 本站為純靜態網頁，不載入任何第三方追蹤碼或分析工具。
+- 專案架構預留多語系擴充空間，未完成翻譯之語言頁面不會出現在導覽列中。
+
+## 意見回饋與提問
+
+留言區還沒上線，排在下一批做。在那之前，回報問題請到對應的地方開一則議題（issue，GitHub 上用來記錄問題與建議的功能，需要一個 GitHub 帳號）：
+
+- **這個網站本身**：錯字、連結壞掉、讀不懂的段落 → [開在網站這裡](https://github.com/Legendream/g0v.civictech-pipeline/issues)
+- **問卷研究**：數字、圖表、分析方法 → [開在研究報告這裡](https://github.com/Legendream/Taiwan-civic-tech-research/issues)
+- **寫作流程**：步驟不清楚、規則互相衝突、想加的功能 → [開在寫作流程這裡](https://github.com/Legendream/AI-Writing-Skill/issues)
+
+留言區做好之後，這一頁就能直接留言，不需要任何帳號。留言政策會跟留言區一起公開。
+
+## 內容時效與版本演化
+
+本寫作流程由多篇實務文章產製過程中迭代歸納而成。各項工具支援與平台爬蟲規則皆標註實測日期；若測試時間已久，建議依最新平台政策重新驗證。
+

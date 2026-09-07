@@ -42,11 +42,13 @@ CC BY 4.0, by g0v jothon & Claire Cheng
 
 ## 意見回饋與提問
 
-本站留言區目前尚未上線，排定於下一階段建置。
+留言區還沒上線，排在下一批做。在那之前，回報問題請到對應的地方開一則議題（issue，GitHub 上用來記錄問題與建議的功能，需要一個 GitHub 帳號）：
 
-在此之前，若在操作中遇到任何步驟疑慮、規則衝突或有改進建議，歡迎至上方三個正本倉庫任一處提出 Issue。
+- **這個網站本身**：錯字、連結壞掉、讀不懂的段落 → [開在網站這裡](https://github.com/Legendream/g0v.civictech-pipeline/issues)
+- **問卷研究**：數字、圖表、分析方法 → [開在研究報告這裡](https://github.com/Legendream/Taiwan-civic-tech-research/issues)
+- **寫作流程**：步驟不清楚、規則互相衝突、想加的功能 → [開在寫作流程這裡](https://github.com/Legendream/AI-Writing-Skill/issues)
 
-（留言功能與相關留言政策將於下一階段建置完成後同步公開）
+留言區做好之後，這一頁就能直接留言，不需要任何帳號。留言政策會跟留言區一起公開。
 
 ## 內容時效與版本演化
 

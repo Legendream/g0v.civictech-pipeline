@@ -18,7 +18,6 @@ const navItems = t.nav.map((item) => ({
   href: `/${locale}/${item.path}/`.replace(/\/+$/, '/'),
 }));
 const aboutHref = `/${locale}/about/`;
-const isPlaceholder = frontmatter?.placeholder === true;
 ---
 <!doctype html>
 <html lang={htmlLang(locale)}>
@@ -92,6 +91,7 @@ const isPlaceholder = frontmatter?.placeholder === true;
   }
   footer { border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.9rem; }
   footer .wrap { padding-block: 24px; }
+  .licence { margin: 8px 0 0; }
   .skip { position: absolute; left: -9999px; }
   .skip:focus { position: static; }
 </style>
@@ -111,12 +111,15 @@ const isPlaceholder = frontmatter?.placeholder === true;
 <main id="main">
   <div class="wrap">
     <slot />
-    {isPlaceholder && <p class="notice">{t.placeholderNotice}</p>}
   </div>
 </main>
 <footer>
   <div class="wrap">
     <a href={aboutHref}>{t.aboutLabel}</a>
+    <p class="licence">
+      {t.licence}
+      <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hant" rel="license">{t.licenceLinkLabel}</a>
+    </p>
   </div>
 </footer>
 </body>

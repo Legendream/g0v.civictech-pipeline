@@ -1,0 +1,31 @@
+---
+// 百分比橫向長條圖。items = [{ label, value }]，value 是百分比數字。
+const { items, caption } = Astro.props;
+---
+<div class="chart">
+  {items.map((item) => (
+    <div class="row">
+      <div class="label">
+        <span>{item.label}</span>
+        <b>{item.value}%</b>
+      </div>
+      <div class="track">
+        <div class="fill" style={`width:${item.value}%`}></div>
+      </div>
+    </div>
+  ))}
+  {caption && <p class="caption">{caption}</p>}
+</div>
+
+<style>
+  .chart { margin: 0 0 20px; }
+  .row + .row { margin-top: 14px; }
+  .label {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    font-size: 14.5px; line-height: 1.6; color: var(--text); margin-bottom: 6px;
+  }
+  .label b { color: var(--accent); font-variant-numeric: tabular-nums; }
+  .track { height: 10px; border-radius: 5px; background: var(--bg-card); border: 1px solid var(--border); overflow: hidden; }
+  .fill { height: 100%; background: var(--accent); }
+  .caption { margin: 14px 0 0; font-size: 13.5px; color: var(--text-dim); }
+</style>

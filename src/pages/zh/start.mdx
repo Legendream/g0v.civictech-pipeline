@@ -3,17 +3,41 @@ layout: ../../layouts/Base.astro
 title: 怎麼開始
 description: 兩條上手路徑、怎麼確認裝對了，以及換一個 AI 工具會怎樣。
 ---
+import Section from '../../components/Section.astro';
+import ScrollNav from '../../components/ScrollNav.astro';
+import CardGrid from '../../components/CardGrid.astro';
+import Card from '../../components/Card.astro';
+import Stack from '../../components/Stack.astro';
+import Faq from '../../components/Faq.astro';
+
+export const sections = [
+  { id: 'checklist', icon: 'checklist', title: '開始前的準備清單', nav: '準備清單', tone: 'accent' },
+  { id: 'matrix', icon: 'grid', title: '工具支援矩陣', nav: '工具矩陣', tone: 'plain' },
+  { id: 'paths', icon: 'route', title: '選擇你的上手路徑', nav: '上手路徑', tone: 'accent' },
+  { id: 'verify', icon: 'verify', title: '如何驗證流程已正確載入', nav: '驗證載入', tone: 'plain' },
+  { id: 'faq', icon: 'chat', title: '常見問題', nav: '常見問題', tone: 'accent' },
+];
+
+<ScrollNav sections={sections} label="頁內段落" />
+
+<Section tone="plain" first>
 
 # 快速開始
 
-## 開始前的準備清單
+</Section>
 
-- **AI 工具環境**：支援 claude.ai 或一個裝得起來的 AI 工具（參見下方支援矩陣）。
-- **專案素材**：相關連結、文件、訪談筆記或會議紀錄（先備妥即可，無需事先閱讀完畢）。
-- **目標讀者設定**：明確定義文章是寫給內行提案者還是初次接觸的大眾。
-- **風格參考（選填）**：你滿意的過往文章或參考範文；若未提供，將採用預設的客觀平實語氣。
+<Section {...sections[0]}>
 
-## 工具支援矩陣
+<CardGrid cols={2}>
+  <Card title="AI 工具環境">支援 claude.ai 或一個裝得起來的 AI 工具（參見下方支援矩陣）。</Card>
+  <Card title="專案素材">相關連結、文件、訪談筆記或會議紀錄（先備妥即可，無需事先閱讀完畢）。</Card>
+  <Card title="目標讀者設定">明確定義文章是寫給內行提案者還是初次接觸的大眾。</Card>
+  <Card title="風格參考（選填）">你滿意的過往文章或參考範文；若未提供，將採用預設的客觀平實語氣。</Card>
+</CardGrid>
+
+</Section>
+
+<Section {...sections[1]}>
 
 | 工具類別 | 推薦安裝方式 | 實測狀態 |
 |---|---|---|
@@ -23,11 +47,14 @@ description: 兩條上手路徑、怎麼確認裝對了，以及換一個 AI 工
 | **ChatGPT / Gemini** | 手動上傳規則檔至 Custom GPT 或 Gem | 完全沒有實測過 |
 
 **實測狀態備註**：
+
 - **claude.ai**：判準是 AI 每輪回覆的最後一行以「下一站：」開頭，四種呼叫說法皆能正常辨識。
 - **Antigravity**：流程跑得完，但交付前那道獨立驗收不能省，當時未通過項目集中在事實查核。
 - **ChatGPT / Gemini**：建議協作時手動對照驗收清單進行查核。
 
-## 選擇你的上手路徑
+</Section>
+
+<Section {...sections[2]}>
 
 ### 路徑 A：瀏覽器直接使用（免安裝程式）
 
@@ -52,7 +79,9 @@ description: 兩條上手路徑、怎麼確認裝對了，以及換一個 AI 工
    請照你剛抓下來那包裡的 civic-tech-writing-pipeline/SKILL.md 流程進行，素材位於素材資料夾。
    ```
 
-## 如何驗證流程已正確載入
+</Section>
+
+<Section {...sections[3]}>
 
 啟動新對話後，AI 會詢問主題範圍、現有素材與文章文體。
 
@@ -65,17 +94,23 @@ AI 本來就會主動提問，就算完全沒載入成功，它也能順暢對�
 - **路徑 A（瀏覽器）**：回頭確認 zip 壓縮檔是否確實上傳成功，且 Capabilities 設定已開啟 Code execution。
 - **路徑 B（本機）**：請 AI「先把 `civic-tech-writing-pipeline/SKILL.md` 開頭那段唸給我聽」，唸不出來代表讀取路徑不正確。
 
-## 常見問題
+</Section>
 
-### 為什麼交付前必須由獨立 AI 驗收？
-實務測試顯示，負責產製草稿的 AI 容易產生盲點。AI 自己來回檢查了四輪，交出來由沒看過草稿過程的獨立 AI 驗收，還是找得出要修的地方。因此，流程強制在第 ⑥ 站使用乾淨對話的獨立 AI，僅輸入「驗收清單」與「文章成品」進行客觀挑錯。
+<Section {...sections[4]} last>
 
-### 我用 ChatGPT 或 Gemini，可以用這套嗎？
-claude.ai 上傳一次即可載入為 Skill，會依規則順序讀取；Custom GPT 與 Gem 是把規則當成參考文件，讀法是挑看起來相關的段落。這套流程的第一步是先盤點素材，挑段落的讀法容易先撈到後面的寫作技巧而直接動筆。目前這部分屬於推論，尚未正式實測。
+<Stack>
+  <Faq q="為什麼交付前必須由獨立 AI 驗收？">
+    實務測試顯示，負責產製草稿的 AI 容易產生盲點。AI 自己來回檢查了四輪，交出來由沒看過草稿過程的獨立 AI 驗收，還是找得出要修的地方。因此，流程強制在第 ⑥ 站使用乾淨對話的獨立 AI，僅輸入「驗收清單」與「文章成品」進行客觀挑錯。
+  </Faq>
+  <Faq q="我用 ChatGPT 或 Gemini，可以用這套嗎？">
+    claude.ai 上傳一次即可載入為 Skill，會依規則順序讀取；Custom GPT 與 Gem 是把規則當成參考文件，讀法是挑看起來相關的段落。這套流程的第一步是先盤點素材，挑段落的讀法容易先撈到後面的寫作技巧而直接動筆。目前這部分屬於推論，尚未正式實測。
+  </Faq>
+  <Faq q="實際用起來像什麼？">
+    包含三件事：開頭是一輪問答；時間主要花在事實查證；AI 自己檢查過的文章仍需交由獨立眼睛挑錯。
+  </Faq>
+  <Faq q="撰寫完成後可以發布在哪裡？">
+    本流程產出的 11 篇公民科技行動指引已收錄於[台灣公民科技資料庫](https://civictech.tw/#know-how)。你自己完成的文章可發布於個人的 Medium、Substack、HackMD 或社群共筆；發布後可自行將連結加入 [g0v 行動指引索引](https://g0v.hackmd.io/@jothon/guide)。
+  </Faq>
+</Stack>
 
-### 實際用起來像什麼？
-包含三件事：開頭是一輪問答；時間主要花在事實查證；AI 自己檢查過的文章仍需交由獨立眼睛挑錯。
-
-### 撰寫完成後可以發布在哪裡？
-本流程產出的 11 篇公民科技行動指引已收錄於[台灣公民科技資料庫](https://civictech.tw/#know-how)。你自己完成的文章可發布於個人的 Medium、Substack、HackMD 或社群共筆；發布後可自行將連結加入 [g0v 行動指引索引](https://g0v.hackmd.io/@jothon/guide)。
-
+</Section>

@@ -1,0 +1,19 @@
+---
+// 常見問題的一張卡。問句在上、答句在下，兩者都直接看得到。
+const { q } = Astro.props;
+---
+<div class="faq">
+  <div class="q">{q}</div>
+  <div class="a"><slot /></div>
+</div>
+
+<style>
+  .faq {
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 18px; background: var(--bg-card);
+  }
+  .q { font-weight: 700; font-size: 15px; color: var(--text); margin-bottom: 8px; line-height: 1.6; }
+  .a { font-size: 14.5px; line-height: 1.75; color: var(--text-dim); }
+  .a :global(p) { margin: 0 0 10px; font-size: inherit; }
+  .a :global(p:last-child) { margin-bottom: 0; }
+</style>

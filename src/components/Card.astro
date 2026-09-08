@@ -1,0 +1,28 @@
+---
+// 一張卡。num 有給就在左上角放一顆編號圓點。
+const { num, title } = Astro.props;
+---
+<div class="card">
+  {num && <div class="num">{num}</div>}
+  {title && <div class="card-title">{title}</div>}
+  <div class="card-body"><slot /></div>
+</div>
+
+<style>
+  .card {
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px; background: var(--bg-card);
+  }
+  .num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--accent-bg); color: var(--accent);
+    font-weight: 700; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+  }
+  .card-title { font-weight: 700; font-size: 15px; color: var(--text); margin-bottom: 8px; line-height: 1.6; }
+  .card-body { font-size: 15px; line-height: 1.7; color: var(--text-dim); }
+  .card-body :global(p) { margin: 0 0 10px; font-size: inherit; }
+  .card-body :global(p:last-child) { margin-bottom: 0; }
+  .card-body :global(ul), .card-body :global(ol) { margin-bottom: 0; font-size: inherit; }
+</style>

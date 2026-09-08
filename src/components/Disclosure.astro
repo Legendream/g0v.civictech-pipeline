@@ -1,0 +1,28 @@
+---
+// 收合說明。用 <details>：沒有 JS 也展得開，鍵盤 Tab 加 Enter 就能操作，
+// aria-expanded 由瀏覽器自己維護。按鈕字串走 zh.json。
+import { getLocaleFromPath, getStrings } from '../i18n/index.js';
+const t = getStrings(getLocaleFromPath(Astro.url.pathname));
+---
+<details class="disclosure">
+  <summary>
+    <span class="to-open">{t.expandLabel} ↓</span>
+    <span class="to-close">{t.collapseLabel} ↑</span>
+  </summary>
+  <div class="body"><slot /></div>
+</details>
+
+<style>
+  .disclosure { margin: 0 0 20px; }
+  summary {
+    display: inline-block; cursor: pointer;
+    color: var(--accent); font-weight: 600; font-size: 14px;
+    text-decoration: underline; list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  .to-close { display: none; }
+  [open] .to-open { display: none; }
+  [open] .to-close { display: inline; }
+  .body { margin-top: 14px; }
+  .body :global(p:last-child) { margin-bottom: 0; }
+</style>

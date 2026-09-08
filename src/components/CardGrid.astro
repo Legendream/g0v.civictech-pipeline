@@ -1,0 +1,10 @@
+---
+// 卡片格線。窄螢幕一律收成單欄，不硬撐等分。
+const { cols = 3 } = Astro.props;
+---
+<div class="grid" style={`--cols:${cols}`}><slot /></div>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(var(--cols), 1fr); gap: 14px; margin: 0 0 20px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+</style>

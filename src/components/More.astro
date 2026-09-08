@@ -1,0 +1,16 @@
+---
+// 段落收尾的去向連結。站外連結補上箭頭與 rel。
+const { href } = Astro.props;
+const external = /^https?:/.test(href);
+---
+<p class="more">
+  <a href={href} {...(external ? { target: '_blank', rel: 'noopener' } : {})}>
+    <slot /><span class="arrow" aria-hidden="true">{external ? ' ↗' : ' →'}</span>
+  </a>
+</p>
+
+<style>
+  .more { margin: 20px 0 0; }
+  .more a { font-weight: 700; text-decoration: none; }
+  .more a:hover { text-decoration: underline; }
+</style>

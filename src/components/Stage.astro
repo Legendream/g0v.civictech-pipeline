@@ -1,0 +1,43 @@
+---
+// 時間軸的一站。左欄 AI 執行（淡綠實底），右欄人決定（虛線框），
+// 兩欄各配一個圖示，對得上上方圖例。
+import Icon from './Icon.astro';
+const { num, title, ai, human } = Astro.props;
+---
+<li class="stage">
+  <div class="head">
+    <span class="num">{num}</span>
+    <span class="title">{title}</span>
+  </div>
+  <div class="cols">
+    <div class="col ai"><Icon name="bot" size={16} /><span>{ai}</span></div>
+    <div class="col human"><Icon name="user" size={16} /><span>{human}</span></div>
+  </div>
+</li>
+
+<style>
+  .stage {
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 18px; background: var(--bg-card); margin: 0;
+  }
+  .head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .num {
+    width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+    background: var(--accent); color: var(--on-accent);
+    font-weight: 700; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .title { font-weight: 700; font-size: 15px; color: var(--text); line-height: 1.5; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .col {
+    display: flex; align-items: flex-start; gap: 8px;
+    border-radius: 8px; padding: 10px 12px;
+    font-size: 13.5px; line-height: 1.6; color: var(--text);
+  }
+  .col :global(.icon) { color: var(--accent); margin-top: 2px; }
+  .ai { background: var(--accent-bg); border: 1px solid transparent; }
+  .human { border: 1px dashed var(--border); }
+
+  @media (max-width: 720px) { .cols { grid-template-columns: 1fr; } }
+</style>

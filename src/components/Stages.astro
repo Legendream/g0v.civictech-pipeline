@@ -1,0 +1,21 @@
+---
+// 八階段時間軸的外框，含兩欄圖例。圖例文字由內容檔傳進來，
+// 因為那是內容不是介面字串。
+import Icon from './Icon.astro';
+const { aiLabel, humanLabel } = Astro.props;
+---
+<div class="legend">
+  <span><Icon name="bot" size={16} />{aiLabel}</span>
+  <span><Icon name="user" size={16} />{humanLabel}</span>
+</div>
+<ol class="stages"><slot /></ol>
+
+<style>
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 8px 20px;
+    font-size: 13.5px; color: var(--text-dim); margin: 0 0 16px;
+  }
+  .legend span { display: flex; align-items: center; gap: 7px; }
+  .legend :global(.icon) { color: var(--accent); }
+  .stages { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+</style>

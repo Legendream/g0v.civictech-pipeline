@@ -1,0 +1,71 @@
+---
+// 長頁面的捲動導覽。項目與段落來自同一份 sections 清單，不會各寫一份。
+// 只列出有給 nav 短標的段落。
+const { sections } = Astro.props;
+const items = sections.filter((s) => s.nav);
+---
+<nav class="scrollnav" aria-label={Astro.props.label}>
+  <div class="scrollnav-inner">
+    {items.map((s) => (
+      <a href={`#${s.id}`} data-target={s.id}>{s.nav}</a>
+    ))}
+  </div>
+</nav>
+
+<style>
+  .scrollnav {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+  }
+  .scrollnav-inner {
+    max-width: 760px; margin: 0 auto; padding: 12px 24px;
+    display: flex; gap: 22px; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .scrollnav-inner::-webkit-scrollbar { display: none; }
+  .scrollnav a {
+    color: var(--text-dim); text-decoration: none; font-size: 14px;
+    white-space: nowrap; padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+  }
+  .scrollnav a:hover { color: var(--accent); }
+  .scrollnav a[aria-current="true"] {
+    color: var(--text); font-weight: 600; border-bottom-color: var(--accent);
+  }
+</style>
+
+<script>
+  // 標示目前捲到哪一段。
+  // 不用 IntersectionObserver 的窄偵測帶：短段落會整段跳過那條帶，
+  // 導覽就會直接跳到下一項（「研究建議」被標成「選題」就是這樣來的）。
+  // 改成每次捲動去找「最後一個已經越過導覽列下緣的段落」，短段落也標得到。
+  const nav = document.querySelector('.scrollnav');
+  if (nav) {
+    const targets = [...nav.querySelectorAll('a')]
+      .map((a) => ({ a, el: document.getElementById(a.dataset.target) }))
+      .filter((t) => t.el);
+
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const line = nav.getBoundingClientRect().bottom + 24;
+      let active = targets[0];
+      for (const t of targets) {
+        if (t.el.getBoundingClientRect().top <= line) active = t;
+      }
+      // 捲到底時標最後一項，否則最後一段永遠標不到
+      const atEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (atEnd) active = targets[targets.length - 1];
+      for (const t of targets) {
+        if (t === active) t.a.setAttribute('aria-current', 'true');
+        else t.a.removeAttribute('aria-current');
+      }
+    };
+    const onScroll = () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  }
+</script>

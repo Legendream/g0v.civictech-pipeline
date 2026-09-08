@@ -21,5 +21,10 @@
   "aboutLabel": "關於這個網站",
   "skipToContent": "跳到主要內容",
   "licence": "本站內容以 CC BY 4.0 釋出，姓名標示：g0v jothon & Claire Cheng",
-  "licenceLinkLabel": "授權條款全文"
+  "licenceLinkLabel": "授權條款全文",
+  "localeLabel": "中文",
+  "themeToDark": "切換成暗色",
+  "themeToLight": "切換成亮色",
+  "expandLabel": "看完整說明",
+  "collapseLabel": "收合說明"
 }

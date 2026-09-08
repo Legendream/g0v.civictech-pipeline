@@ -1,0 +1,40 @@
+---
+// 一個 H2 段落 = 一個滿版色塊。背景在 --bg 與 --accent-bg 之間交錯，
+// 內容再收到 680px 置中。取代舊站整頁單一底色的長文讀法。
+import Icon from './Icon.astro';
+const { id, title, icon, tone = 'plain', first = false, last = false } = Astro.props;
+---
+<section id={id} class:list={['band', tone, { first, last }]}>
+  <div class="band-inner">
+    {/* 頁面開頭的 H1 與引言要排在 H2 標題列前面，走這個插槽 */}
+    <slot name="lead" />
+    {title && (
+      <div class="band-head">
+        <Icon name={icon} />
+        <h2>{title}</h2>
+      </div>
+    )}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .band { padding: 56px 0; }
+  .band.plain { background: var(--bg); }
+  .band.accent { background: var(--accent-bg); }
+  .band.first { padding-top: 64px; padding-bottom: 48px; }
+  .band.last { padding-bottom: 96px; }
+  .band-inner { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+  /* 圖示與標題同一行，圖示吃 accent 色 */
+  .band-head { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .band-head :global(.icon) { color: var(--accent); }
+  .band-head h2 { margin: 0; }
+
+  @media (max-width: 640px) {
+    .band { padding: 40px 0; }
+    .band.first { padding-top: 44px; padding-bottom: 36px; }
+    .band.last { padding-bottom: 64px; }
+    .band-head { gap: 10px; }
+  }
+</style>

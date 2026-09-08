@@ -21,11 +21,11 @@ const { num, title, ai, human } = Astro.props;
     padding: 16px 18px; background: var(--bg-card); margin: 0;
   }
   .head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  /* 編號用的是 ①-⑧，字形本身已經有一圈，再包一顆實心圓會變成圈中圈。
+     所以只上色放大，不畫底。 */
   .num {
-    width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
-    background: var(--accent); color: var(--on-accent);
-    font-weight: 700; font-size: 13px;
-    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: var(--accent);
+    font-weight: 700; font-size: 20px; line-height: 1;
   }
   .title { font-weight: 700; font-size: 15px; color: var(--text); line-height: 1.5; }
 

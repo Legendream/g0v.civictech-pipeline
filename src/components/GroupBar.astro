@@ -1,7 +1,8 @@
 ---
 // 依人數比例分色的色塊條。圖例放在色塊條下方，不塞進色塊裡：
 // 塞進去窄螢幕會被裁掉。
-const { groups, caption } = Astro.props;
+// unit 由內容檔提供：單位是中文，不能寫死在元件裡
+const { groups, caption, unit = '' } = Astro.props;
 ---
 <div class="groupbar">
   <div class="bar">
@@ -14,7 +15,7 @@ const { groups, caption } = Astro.props;
       <li>
         <span class={`dot seg${i + 1}`}></span>
         <span class="legend-label">{g.label}</span>
-        <b>{g.count}</b>
+        <b>{g.count}{unit}</b>
       </li>
     ))}
   </ul>

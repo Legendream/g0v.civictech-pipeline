@@ -49,28 +49,28 @@ AI 承擔素材萃取、大綱排版與初稿撰寫；核心論點、事實查�
 流程預設在每個階段完成後暫停，確認方向無誤後再推進至下一站：
 
 <Stages aiLabel="AI 執行任務" humanLabel="人類決策節點">
-  <Stage num="1" title="素材盤點"
+  <Stage num="①" title="素材盤點"
     ai="逐篇研讀輸入素材，提供研讀摘要與憑證"
     human="確認素材完整度，決定是否補充資料或調整範圍" />
-  <Stage num="2" title="大綱結構"
+  <Stage num="②" title="大綱結構"
     ai="規劃章節架構，並列出關鍵詞檢索結果"
     human="確認篇章邏輯；若是方法論長文，需審核各節主張表" />
-  <Stage num="3" title="初稿撰寫"
+  <Stage num="③" title="初稿撰寫"
     ai="根據大綱產出全文草稿，標註事實出處"
     human="暫不需介入，由 AI 自動完成初稿" />
-  <Stage num="4" title="事實查核"
+  <Stage num="④" title="事實查核"
     ai="逐條核對事實來源，標示查證依據等級"
     human="針對依據等級較低或存疑的事實，進行最終判定" />
-  <Stage num="5" title="風格套用"
+  <Stage num="⑤" title="風格套用"
     ai="依據提供的範文或風格指南調整行文語氣"
     human="提供參考範文，或直接採用預設的中性平實語氣" />
-  <Stage num="6" title="獨立驗收"
+  <Stage num="⑥" title="獨立驗收"
     ai="啟用未參與草稿產製的獨立 AI 進行挑錯"
     human="檢視驗收報告，決定是否採納修改建議" />
-  <Stage num="7" title="人工精修"
+  <Stage num="⑦" title="人工精修"
     ai="保持待命，僅依作者指令輔助微調"
     human="由作者主導段落修飾、取捨與標題定稿" />
-  <Stage num="8" title="發布檢驗"
+  <Stage num="⑧" title="發布檢驗"
     ai="測試發布網址是否符合搜尋與 AI 檢索標準"
     human="決定發布平台與正式網址" />
 </Stages>

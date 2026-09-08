@@ -88,6 +88,19 @@ const alternates = localesWithPage(Astro.url.pathname);
     color-scheme: dark;
   }
 
+  /* 版面三軌：
+     --prose 是段落寬度，中文一行太長會回行找不到位置，不宜再寬多少；
+     --wide  是卡片、表格、時間軸、圖表用的，這些東西需要橫向空間；
+     --shell 是頁首頁尾，跟 --wide 對齊，整頁才有一致的左右邊界。 */
+  :root {
+    --prose: 720px;
+    --wide: 1080px;
+    /* 頁首頁尾的文字左緣要落在同一條軸上，所以是軌道寬加上左右內距 */
+    --shell: calc(var(--wide) + 48px);
+    /* 站名要看得出是站名，但不能蓋過每頁自己的 H1（2.2rem） */
+    --site-name: 20px;
+  }
+
   * { box-sizing: border-box; }
   body {
     margin: 0;
@@ -99,8 +112,8 @@ const alternates = localesWithPage(Astro.url.pathname);
     font-size: 17px;
   }
 
-  /* 頁首與頁尾比內文寬一點（760），內文是 680，讀起來才不會整頁一樣寬。 */
-  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  /* 頁首與頁尾的容器。寬度由 --shell 推導，讓它們的文字左緣落在跟內文同一條軸上。 */
+  .wrap { max-width: var(--shell); margin: 0 auto; padding: 0 24px; }
 
   .topbar { display: flex; justify-content: flex-end; align-items: center; gap: 10px; padding-top: 20px; }
   .locale-pill {
@@ -119,7 +132,10 @@ const alternates = localesWithPage(Astro.url.pathname);
     display: flex; justify-content: space-between; align-items: center;
     flex-wrap: wrap; gap: 8px 20px; padding-block: 16px;
   }
-  .site-name { font-weight: 600; font-size: 15px; color: var(--text); text-decoration: none; }
+  .site-name {
+    font-weight: 700; font-size: var(--site-name); color: var(--text);
+    text-decoration: none; letter-spacing: -0.01em;
+  }
   /* 導覽項目數量不寫死成四等分，之後語言不同項目數不同也不會破版 */
   nav { display: flex; gap: 16px; flex-wrap: wrap; }
   nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; }
@@ -130,7 +146,7 @@ const alternates = localesWithPage(Astro.url.pathname);
      一定要排除 nav（sticky 捲動導覽是滿版的，收窄會讓底線只剩中間一段）
      與 script／style（它們不該吃到版面規則）。 */
   main > :not(section):not(nav):not(script):not(style) {
-    max-width: 680px; margin-inline: auto; padding-inline: 24px;
+    max-width: var(--prose); margin-inline: auto; padding-inline: 24px;
   }
   main > :not(section):not(nav):not(script):not(style):first-child { margin-top: 40px; }
   main > :not(section):not(nav):not(script):not(style):last-child { margin-bottom: 80px; }

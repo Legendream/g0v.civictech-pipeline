@@ -24,7 +24,27 @@ const { id, title, icon, tone = 'plain', first = false, last = false } = Astro.p
   .band.accent { background: var(--accent-bg); }
   .band.first { padding-top: 64px; padding-bottom: 48px; }
   .band.last { padding-bottom: 96px; }
-  .band-inner { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+  /* 單一對齊軸（Swiss Modernism 的做法）：
+     整塊內容置中在 --wide 這條軌道上，段落在軌道內「靠左」、只用 max-width 限制行長。
+     先前是段落與卡片各自置中，兩者左緣差了一百多 px，
+     標題看起來就會像相對於下方卡片內縮。 */
+  .band-inner {
+    display: grid;
+    grid-template-columns:
+      [full-start] minmax(24px, 1fr)
+      [track-start] minmax(0, var(--wide))
+      [track-end] minmax(24px, 1fr)
+      [full-end];
+  }
+  .band-inner > :global(*) {
+    grid-column: track-start / track-end;
+    max-width: var(--prose);
+  }
+  /* 卡片、表格、時間軸吃滿整條軌道，左緣仍與段落同一條線 */
+  .band-inner > :global(.wide-block) {
+    grid-column: track-start / track-end;
+    max-width: none;
+  }
 
   /* 圖示與標題同一行，圖示吃 accent 色 */
   .band-head { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }

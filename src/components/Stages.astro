@@ -8,7 +8,7 @@ const { aiLabel, humanLabel } = Astro.props;
   <span><Icon name="bot" size={16} />{aiLabel}</span>
   <span><Icon name="user" size={16} />{humanLabel}</span>
 </div>
-<ol class="stages" role="list"><slot /></ol>
+<ol class="stages wide-block" role="list"><slot /></ol>
 
 <style>
   .legend {

@@ -3,12 +3,14 @@
 // 不會把近 1MB 的原圖丟給讀者。
 import { Image } from 'astro:assets';
 import portrait from '../assets/claire-portrait.jpeg';
-const { name } = Astro.props;
+const { name, url } = Astro.props;
 ---
 <div class="portrait">
   <Image src={portrait} alt={name} width={176} height={176} />
   <div>
-    <div class="name">{name}</div>
+    <div class="name">
+      {url ? <a href={url} target="_blank" rel="noopener noreferrer">{name}</a> : name}
+    </div>
     <div class="bio"><slot /></div>
   </div>
 </div>
@@ -21,6 +23,7 @@ const { name } = Astro.props;
   }
   .portrait > div { flex: 1; min-width: 220px; }
   .name { font-weight: 700; font-size: var(--fs-sm); color: var(--text); margin-bottom: 8px; }
+  .name a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
   .bio { font-size: var(--fs-md); line-height: 1.8; color: var(--text-dim); }
   .bio :global(p) { margin: 0; font-size: inherit; }
 </style>

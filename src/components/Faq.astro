@@ -12,8 +12,8 @@ const { q } = Astro.props;
     border: 1px solid var(--border); border-radius: 12px;
     padding: 16px 18px; background: var(--bg-card);
   }
-  .q { font-weight: 700; font-size: 15px; color: var(--text); margin-bottom: 8px; line-height: 1.6; }
-  .a { font-size: 14.5px; line-height: 1.75; color: var(--text-dim); }
+  .q { font-weight: 700; font-size: var(--fs-sm); color: var(--text); margin-bottom: 8px; line-height: 1.6; }
+  .a { font-size: var(--fs-xs); line-height: 1.75; color: var(--text-dim); }
   .a :global(p) { margin: 0 0 10px; font-size: inherit; }
   .a :global(p:last-child) { margin-bottom: 0; }
 </style>

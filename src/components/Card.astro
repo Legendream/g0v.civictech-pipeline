@@ -16,12 +16,12 @@ const { num, title } = Astro.props;
   .num {
     width: 26px; height: 26px; border-radius: 50%;
     background: var(--accent-bg); color: var(--accent);
-    font-weight: 700; font-size: 13px;
+    font-weight: 700; font-size: var(--fs-2xs);
     display: flex; align-items: center; justify-content: center;
     margin-bottom: 12px;
   }
-  .card-title { font-weight: 700; font-size: 15px; color: var(--text); margin-bottom: 8px; line-height: 1.6; }
-  .card-body { font-size: 15px; line-height: 1.7; color: var(--text-dim); }
+  .card-title { font-weight: 700; font-size: var(--fs-sm); color: var(--text); margin-bottom: 8px; line-height: 1.6; }
+  .card-body { font-size: var(--fs-sm); line-height: 1.7; color: var(--text-dim); }
   .card-body :global(p) { margin: 0 0 10px; font-size: inherit; }
   .card-body :global(p:last-child) { margin-bottom: 0; }
   .card-body :global(ul), .card-body :global(ol) { margin-bottom: 0; font-size: inherit; }

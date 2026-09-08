@@ -20,7 +20,7 @@ const { name } = Astro.props;
     object-fit: cover; flex-shrink: 0;
   }
   .portrait > div { flex: 1; min-width: 220px; }
-  .name { font-weight: 700; font-size: 15px; color: var(--text); margin-bottom: 8px; }
-  .bio { font-size: 16px; line-height: 1.8; color: var(--text-dim); }
+  .name { font-weight: 700; font-size: var(--fs-sm); color: var(--text); margin-bottom: 8px; }
+  .bio { font-size: var(--fs-md); line-height: 1.8; color: var(--text-dim); }
   .bio :global(p) { margin: 0; font-size: inherit; }
 </style>

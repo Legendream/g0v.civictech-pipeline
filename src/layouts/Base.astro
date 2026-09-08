@@ -127,10 +127,14 @@ const aboutHref = `/${locale}/about/`;
   nav a:hover, nav a[aria-current="page"] { color: var(--accent); }
 
   main { display: block; }
-  /* 沒有包在 <section> 裡的內容（例如 404 頁）照樣要置中收窄，不要整頁展開 */
-  main > :not(section) { max-width: 680px; margin-inline: auto; padding-inline: 24px; }
-  main > :first-child { margin-top: 40px; }
-  main > :last-child { margin-bottom: 80px; }
+  /* 保險絲：萬一有內容沒包進色塊，照樣置中收窄。
+     一定要排除 nav（sticky 捲動導覽是滿版的，收窄會讓底線只剩中間一段）
+     與 script／style（它們不該吃到版面規則）。 */
+  main > :not(section):not(nav):not(script):not(style) {
+    max-width: 680px; margin-inline: auto; padding-inline: 24px;
+  }
+  main > :not(section):not(nav):not(script):not(style):first-child { margin-top: 40px; }
+  main > :not(section):not(nav):not(script):not(style):last-child { margin-bottom: 80px; }
 
   h1 { font-size: 2.2rem; line-height: 1.3; margin: 0 0 24px; letter-spacing: -0.01em; }
   h2 { font-size: 1.4rem; line-height: 1.5; margin: 0 0 16px; }
@@ -167,7 +171,9 @@ const aboutHref = `/${locale}/about/`;
   thead tr { background: var(--accent); }
   th {
     text-align: left; font-weight: 700; padding: 10px 14px;
-    color: var(--on-accent); border-right: 1px solid rgba(255, 255, 255, 0.18);
+    color: var(--on-accent);
+    /* 分隔線用 accent-bg：亮色是淺色壓在深綠上、暗色是深色壓在淺綠上，兩邊都看得見 */
+    border-right: 1px solid var(--accent-bg);
   }
   th:last-child { border-right: 0; }
   td {

@@ -9,7 +9,7 @@ const { groups, caption } = Astro.props;
       <div class={`seg seg${i + 1}`} style={`flex:${g.count}`}></div>
     ))}
   </div>
-  <ul class="legend">
+  <ul class="legend" role="list">
     {groups.map((g, i) => (
       <li>
         <span class={`dot seg${i + 1}`}></span>

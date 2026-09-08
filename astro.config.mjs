@@ -14,7 +14,9 @@ function rehypeWrapTables() {
           return {
             type: 'element',
             tagName: 'div',
-            properties: { className: ['table-scroll'], tabindex: 0, role: 'region' },
+            // tabindex 讓鍵盤使用者也能用方向鍵捲動；
+            // 不掛 role="region"，沒有名字的地標對螢幕閱讀器只是噪音
+            properties: { className: ['table-scroll'], tabindex: 0 },
             children: [child],
           };
         }

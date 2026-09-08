@@ -2,9 +2,12 @@
 // 卡片格線。窄螢幕一律收成單欄，不硬撐等分。
 const { cols = 3 } = Astro.props;
 ---
-<div class="grid" style={`--cols:${cols}`}><slot /></div>
+<div class="grid wide-block" style={`--cols:${cols}`}><slot /></div>
 
 <style>
   .grid { display: grid; grid-template-columns: repeat(var(--cols), 1fr); gap: 14px; margin: 0 0 20px; }
+  /* 平板寬度先收成兩欄：維持三欄的話每張卡只剩 231px，
+     內文一行只放得下 12 個中文字，會被擠成細長條。 */
+  @media (max-width: 1023px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
 </style>

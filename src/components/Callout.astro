@@ -1,0 +1,21 @@
+---
+// 一句話摘要卡：密集段落的標題下方先給重點，細節接在下面。
+import Icon from './Icon.astro';
+---
+<div class="callout">
+  <Icon name="check" size={18} />
+  <div><slot /></div>
+</div>
+
+<style>
+  .callout {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 18px;
+    font-size: 15px; font-weight: 600; line-height: 1.7;
+    color: var(--text);
+    margin: 0 0 20px;
+  }
+  .callout :global(.icon) { color: var(--accent); margin-top: 4px; }
+  .callout :global(p) { margin: 0; }
+</style>

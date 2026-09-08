@@ -1,0 +1,40 @@
+---
+// 依人數比例分色的色塊條。圖例放在色塊條下方，不塞進色塊裡：
+// 塞進去窄螢幕會被裁掉。
+// unit 由內容檔提供：單位是中文，不能寫死在元件裡
+const { groups, caption, unit = '' } = Astro.props;
+---
+<div class="groupbar">
+  <div class="bar">
+    {groups.map((g, i) => (
+      <div class={`seg seg${i + 1}`} style={`flex:${g.count}`}></div>
+    ))}
+  </div>
+  <ul class="legend" role="list">
+    {groups.map((g, i) => (
+      <li>
+        <span class={`dot seg${i + 1}`}></span>
+        <span class="legend-label">{g.label}</span>
+        <b>{g.count}{unit}</b>
+      </li>
+    ))}
+  </ul>
+  {caption && <p class="caption">{caption}</p>}
+</div>
+
+<style>
+  .groupbar { margin: 0 0 20px; }
+  .bar {
+    display: flex; height: 14px; border-radius: 7px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .seg1 { background: var(--accent); }
+  .seg2 { background: var(--bg-card); }
+  .seg3 { background: var(--border); }
+
+  .legend { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  .legend li { display: flex; align-items: center; gap: 7px; font-size: 14px; color: var(--text-dim); margin: 0; }
+  .dot { width: 12px; height: 12px; border-radius: 3px; border: 1px solid var(--border); flex-shrink: 0; }
+  .legend b { color: var(--text); font-variant-numeric: tabular-nums; }
+  .caption { margin: 12px 0 0; font-size: 13.5px; color: var(--text-dim); }
+</style>

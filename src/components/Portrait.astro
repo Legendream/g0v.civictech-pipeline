@@ -1,0 +1,26 @@
+---
+// 作者介紹區塊。圖片走 astro:assets，會自動壓成適合 88px 圓形的尺寸，
+// 不會把近 1MB 的原圖丟給讀者。
+import { Image } from 'astro:assets';
+import portrait from '../assets/claire-portrait.jpeg';
+const { name } = Astro.props;
+---
+<div class="portrait">
+  <Image src={portrait} alt={name} width={176} height={176} />
+  <div>
+    <div class="name">{name}</div>
+    <div class="bio"><slot /></div>
+  </div>
+</div>
+
+<style>
+  .portrait { display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+  .portrait :global(img) {
+    width: 88px; height: 88px; border-radius: 50%;
+    object-fit: cover; flex-shrink: 0;
+  }
+  .portrait > div { flex: 1; min-width: 220px; }
+  .name { font-weight: 700; font-size: 15px; color: var(--text); margin-bottom: 8px; }
+  .bio { font-size: 16px; line-height: 1.8; color: var(--text-dim); }
+  .bio :global(p) { margin: 0; font-size: inherit; }
+</style>

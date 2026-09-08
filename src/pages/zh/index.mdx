@@ -1,0 +1,100 @@
+---
+layout: ../../layouts/Base.astro
+title: 首頁
+description: 把社群經驗化為持續運作的解法。以公民科技為示範領域的人機協同寫作流程，將實戰經驗轉化為可查證、易檢索的行動指引。
+---
+import Section from '../../components/Section.astro';
+import Callout from '../../components/Callout.astro';
+import CardGrid from '../../components/CardGrid.astro';
+import Card from '../../components/Card.astro';
+import BarChart from '../../components/BarChart.astro';
+import More from '../../components/More.astro';
+import Portrait from '../../components/Portrait.astro';
+
+export const sections = [
+  { id: 'why', icon: 'search', title: '為什麼需要這套流程', tone: 'accent' },
+  { id: 'features', icon: 'grid', title: '三大核心特色', tone: 'plain' },
+  { id: 'start', icon: 'route', title: '快速開始', tone: 'accent' },
+  { id: 'scope', icon: 'book', title: '方法與領域適用性', tone: 'plain' },
+];
+
+<Section tone="plain" first>
+
+# 把社群經驗化為持續運作的解法：人機協同寫作流程
+
+許多社群專案累積了解法與踩坑紀錄，但往往因動筆與整理成本過高而難以傳承。當核心成員淡出，後續參與者往往只能重複摸索。
+
+這套方法論從真實問題洞察出發，以公民科技為示範領域。透過結構化的人機協同機制，協助專案以更低的時間負擔，產出結構清晰、附帶完整事實查核軌跡的行動指引。
+
+</Section>
+
+<Section {...sections[0]}>
+
+<Callout>只聽過或看過的那 26 位，最多人卡在不知道有什麼、找不到入口，技術門檻排在最後。</Callout>
+
+在 127 位問卷受訪者中，有 26 人只聽過或看過公民科技、尚未實際接觸。問這 26 人為什麼還沒參與，最多人選的是「不知道有哪些專案或議題可以參與」，佔 62%；「覺得要會寫程式、技術門檻太高」只排到第四，佔 35%。
+
+<BarChart
+  items={[
+    { label: '不知道有哪些專案或議題可以參與', value: 62 },
+    { label: '身邊沒有人帶，怕融不進去或幫不上忙', value: 54 },
+    { label: '不知道怎麼加入、找不到入口', value: 50 },
+    { label: '覺得要會寫程式、技術門檻太高', value: 35 },
+  ]}
+  caption="只問了「只聽過或看過」的 26 位，最多可選 3 項，因此百分比加總超過 100%。"
+/>
+
+擋住人的是資訊與入口，不是能力。目前[台灣公民科技資料庫](https://civictech.tw/)已收錄超過 350 個專案，但[行動指引](https://civictech.tw/#know-how)僅有 31 篇。這套流程正是為了解決經驗難以傳承、動筆門檻過高的問題。
+
+<More href="/zh/why/">查看完整問卷發現與分析</More>
+
+</Section>
+
+<Section {...sections[1]}>
+
+<CardGrid cols={3}>
+  <Card num="1" title="明確的人機分工">
+    素材整理、結構大綱與初稿撰寫交由 AI 處理；核心主張、風格取捨、關鍵事實判定與發布決策由你親自把關。
+  </Card>
+  <Card num="2" title="附帶完整稽核軌跡">
+    產出不只是一篇文章，還同步包含事實查核總表、依據等級標註與引用清單，讓每項陳述都有出處可查。
+  </Card>
+  <Card num="3" title="開箱即用與開源授權">
+    整套流程以 CC BY 4.0 授權開源釋出。使用 claude.ai Pro 方案並開啟 Code execution 設定後，在瀏覽器上傳 zip 壓縮檔即可啟用 Skill 進行協作。
+  </Card>
+</CardGrid>
+
+<More href="/zh/pipeline/">了解 8 個協作階段如何運作</More>
+
+</Section>
+
+<Section {...sections[2]}>
+
+你可以依照平常使用的工具，挑選適合的上手路徑：
+
+<CardGrid cols={2}>
+  <Card title="瀏覽器直接使用（免寫程式）">
+    下載 zip 壓縮檔並上傳至 claude.ai，全程於瀏覽器操作。
+  </Card>
+  <Card title="本機終端路徑">
+    使用支援本機檔案的工具直接載入專案資料夾。
+  </Card>
+</CardGrid>
+
+<More href="/zh/start/">查看詳細安裝與開始步驟</More>
+
+</Section>
+
+<Section {...sections[3]}>
+
+公民科技是這次研究與流程設計的示範領域，但這套人機協作寫作方法本身與特定領域無關。要寫的是產業報告、社區紀錄還是內部文件，同一套走法都成立。
+
+</Section>
+
+<Section tone="accent" last>
+
+<Portrait name="鄭婷宇（Claire）">
+自由工作者，長期關注開放政府、公私協力與公民科技，工作範圍橫跨開源社群、倡議團體與政府部門，也承接企業的數位轉型專案，專長是研究與專案管理。
+</Portrait>
+
+</Section>

@@ -1,0 +1,7 @@
+---
+// 一疊等寬的卡片，直向排列。給 FAQ、文章清單這種一條一條的內容用。
+---
+<div class="stack"><slot /></div>
+<style>
+  .stack { display: flex; flex-direction: column; gap: 12px; margin: 0 0 20px; }
+</style>

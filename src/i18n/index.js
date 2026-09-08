@@ -1,8 +1,9 @@
 // 介面字串與語言設定的唯一來源。
 // 加一個語言要動的地方：
-//   1. 這個檔的 LOCALES 加一個代號
+//   1. 這個檔的 LOCALES 加一個代號，並且 import 那份 json、把它加進 STRINGS
+//      （漏了 STRINGS 那筆不會報錯，getStrings() 會靜默退回預設語言）
 //   2. 新增 src/i18n/<代號>.json
-//   3. 新增 src/pages/<代號>/*.md
+//   3. 新增 src/pages/<代號>/*.mdx
 //   4. 只有在「代號跟 HTML 的語言標記長得不一樣」時，HTML_LANG 才要補一筆
 //      （例如 zh 要寫成 zh-Hant；en、ja 這種一模一樣的就不用）
 // 版型檔（src/layouts/Base.astro）不需要改。

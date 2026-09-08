@@ -88,17 +88,32 @@ const alternates = localesWithPage(Astro.url.pathname);
     color-scheme: dark;
   }
 
-  /* 版面三軌：
-     --prose 是段落寬度，中文一行太長會回行找不到位置，不宜再寬多少；
-     --wide  是卡片、表格、時間軸、圖表用的，這些東西需要橫向空間；
-     --shell 是頁首頁尾，跟 --wide 對齊，整頁才有一致的左右邊界。 */
+  /* 版面寬度。目前 --prose 與 --wide 相等，也就是單欄：
+     段落、卡片、表格、時間軸全部同寬，因此同時「置中」且「左緣對齊」。
+
+     兩者拆成兩個變數是刻意的：如果哪天想讓表格或時間軸比段落寬，
+     把 --wide 調大即可，掛了 .wide-block 的元素會吃到那個寬度。
+     但要知道代價——一旦兩者不等，純文字的區塊就會靠左、右邊空一塊，
+     整段看起來偏離中央。2026-09-08 試過 720/1080，就是因為這個改回單欄。
+
+     欄寬受中文行長限制：舒適區間 35 到 45 字，19px 字級下 45 字就是 855px。
+     要再寬只能連字級一起放大。
+     --shell 是頁首頁尾，比 --wide 多出左右內距，讓文字左緣落在同一條軸上。 */
   :root {
-    --prose: 720px;
-    --wide: 1080px;
+    --prose: 860px;
+    --wide: 860px;
     /* 頁首頁尾的文字左緣要落在同一條軸上，所以是軌道寬加上左右內距 */
     --shell: calc(var(--wide) + 48px);
-    /* 站名要看得出是站名，但不能蓋過每頁自己的 H1（2.2rem） */
-    --site-name: 20px;
+    /* 字級級距。全站字級只從這裡取，不要在元件裡再寫死 px：
+       2026-09-08 把內文從 17 拉到 19 時，全站有 24 處寫死的字級要一起改，
+       漏掉任何一處那個元件就會相對縮水。 */
+    --fs-3xs: 13px;
+    --fs-2xs: 15px;
+    --fs-xs: 16px;
+    --fs-sm: 17px;
+    --fs-md: 18px;
+    --fs-body: 19px;
+    --fs-lg: 22px;
   }
 
   * { box-sizing: border-box; }
@@ -109,7 +124,7 @@ const alternates = localesWithPage(Astro.url.pathname);
     font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC",
                  "Microsoft JhengHei", system-ui, sans-serif;
     line-height: 1.75;
-    font-size: 17px;
+    font-size: var(--fs-body);
   }
 
   /* 頁首與頁尾的容器。寬度由 --shell 推導，讓它們的文字左緣落在跟內文同一條軸上。 */
@@ -118,11 +133,11 @@ const alternates = localesWithPage(Astro.url.pathname);
   .topbar { display: flex; justify-content: flex-end; align-items: center; gap: 10px; padding-top: 20px; }
   .locale-pill {
     border: 1px solid var(--border); color: var(--text-dim);
-    padding: 6px 12px; border-radius: 20px; font-size: 12px;
+    padding: 6px 12px; border-radius: 20px; font-size: var(--fs-3xs);
   }
   .theme-toggle {
     border: 1px solid var(--border); background: var(--bg-card); color: var(--text);
-    padding: 8px 14px; border-radius: 20px; font-size: 13px; cursor: pointer;
+    padding: 8px 14px; border-radius: 20px; font-size: var(--fs-2xs); cursor: pointer;
     font-family: inherit;
   }
   .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
@@ -133,12 +148,12 @@ const alternates = localesWithPage(Astro.url.pathname);
     flex-wrap: wrap; gap: 8px 20px; padding-block: 16px;
   }
   .site-name {
-    font-weight: 700; font-size: var(--site-name); color: var(--text);
+    font-weight: 700; font-size: var(--fs-lg); color: var(--text);
     text-decoration: none; letter-spacing: -0.01em;
   }
   /* 導覽項目數量不寫死成四等分，之後語言不同項目數不同也不會破版 */
   nav { display: flex; gap: 16px; flex-wrap: wrap; }
-  nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; }
+  nav a { color: var(--text-dim); text-decoration: none; font-size: var(--fs-xs); }
   nav a:hover, nav a[aria-current="page"] { color: var(--accent); }
 
   main { display: block; }
@@ -151,10 +166,10 @@ const alternates = localesWithPage(Astro.url.pathname);
   main > :not(section):not(nav):not(script):not(style):first-child { margin-top: 40px; }
   main > :not(section):not(nav):not(script):not(style):last-child { margin-bottom: 80px; }
 
-  h1 { font-size: 2.2rem; line-height: 1.3; margin: 0 0 24px; letter-spacing: -0.01em; }
-  h2 { font-size: 1.4rem; line-height: 1.5; margin: 0 0 16px; }
-  h3 { font-size: 1.08rem; line-height: 1.6; margin: 28px 0 10px; color: var(--text); }
-  h4 { font-size: 1rem; margin: 20px 0 8px; color: var(--text); }
+  h1 { font-size: 2.46rem; line-height: 1.3; margin: 0 0 24px; letter-spacing: -0.01em; }
+  h2 { font-size: 1.57rem; line-height: 1.5; margin: 0 0 16px; }
+  h3 { font-size: 1.21rem; line-height: 1.6; margin: 28px 0 10px; color: var(--text); }
+  h4 { font-size: 1.12rem; margin: 20px 0 8px; color: var(--text); }
   p { margin: 0 0 16px; line-height: 1.8; }
   a { color: var(--accent); }
   strong { font-weight: 700; color: var(--text); }
@@ -179,7 +194,7 @@ const alternates = localesWithPage(Astro.url.pathname);
   .table-scroll { overflow-x: auto; margin: 0 0 16px; -webkit-overflow-scrolling: touch; }
   table {
     width: 100%; min-width: 420px; border-collapse: collapse;
-    font-size: 0.9rem; background: var(--bg-card);
+    font-size: var(--fs-xs); background: var(--bg-card);
     border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
   }
   /* 表頭用實心 accent，不用淺色底：淺色底疊在淺色色塊上會分不出來 */
@@ -203,7 +218,7 @@ const alternates = localesWithPage(Astro.url.pathname);
     margin: 0 0 16px; padding: 14px 18px;
     background: #24292e !important; color: #e1e4e8;
     border-radius: 8px; overflow-x: auto;
-    font-size: 14px; line-height: 1.7;
+    font-size: var(--fs-xs); line-height: 1.7;
     -webkit-overflow-scrolling: touch;
   }
   pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
@@ -216,7 +231,7 @@ const alternates = localesWithPage(Astro.url.pathname);
 
   img { max-width: 100%; height: auto; }
 
-  footer { border-top: 1px solid var(--border); color: var(--text-dim); font-size: 13px; }
+  footer { border-top: 1px solid var(--border); color: var(--text-dim); font-size: var(--fs-2xs); }
   footer .wrap { padding-block: 24px; }
   footer a { font-weight: 600; }
   .licence { margin: 8px 0 0; }
@@ -227,8 +242,8 @@ const alternates = localesWithPage(Astro.url.pathname);
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   @media (max-width: 640px) {
-    h1 { font-size: 1.75rem; }
-    h2 { font-size: 1.25rem; }
+    h1 { font-size: 1.95rem; }
+    h2 { font-size: 1.4rem; }
   }
 </style>
 </head>

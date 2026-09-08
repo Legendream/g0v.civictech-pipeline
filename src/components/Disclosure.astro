@@ -16,7 +16,7 @@ const t = getStrings(getLocaleFromPath(Astro.url.pathname));
   .disclosure { margin: 0 0 20px; }
   summary {
     display: inline-block; cursor: pointer;
-    color: var(--accent); font-weight: 600; font-size: 14px;
+    color: var(--accent); font-weight: 600; font-size: var(--fs-xs);
     text-decoration: underline; list-style: none;
   }
   summary::-webkit-details-marker { display: none; }

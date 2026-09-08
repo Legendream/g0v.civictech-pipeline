@@ -25,15 +25,15 @@ const { num, title, ai, human } = Astro.props;
      所以只上色放大，不畫底。 */
   .num {
     flex-shrink: 0; color: var(--accent);
-    font-weight: 700; font-size: 20px; line-height: 1;
+    font-weight: 700; font-size: var(--fs-lg); line-height: 1;
   }
-  .title { font-weight: 700; font-size: 15px; color: var(--text); line-height: 1.5; }
+  .title { font-weight: 700; font-size: var(--fs-sm); color: var(--text); line-height: 1.5; }
 
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .col {
     display: flex; align-items: flex-start; gap: 8px;
     border-radius: 8px; padding: 10px 12px;
-    font-size: 13.5px; line-height: 1.6; color: var(--text);
+    font-size: var(--fs-2xs); line-height: 1.6; color: var(--text);
   }
   .col :global(.icon) { color: var(--accent); margin-top: 2px; }
   .ai { background: var(--accent-bg); border: 1px solid transparent; }

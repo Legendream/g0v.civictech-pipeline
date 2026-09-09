@@ -35,7 +35,7 @@
     "submit": "送出留言",
     "submitting": "送出中…",
     "loading": "留言載入中…",
-    "empty": "還沒有留言，留下第一則吧。",
+    "empty": "尚無留言，歡迎留下第一則回饋。",
     "loadError": "留言載入失敗，重新整理頁面再試一次。",
     "bodyRequiredError": "留言內容不能是空的。",
     "submitError": "送出失敗，稍後再試一次。",

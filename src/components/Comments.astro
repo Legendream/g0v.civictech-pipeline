@@ -13,22 +13,28 @@ const t = getStrings(locale).comments;
 const turnstileSiteKey = '0x4AAAAAAEtXFgBnziV68VEm';
 ---
 <div class="comments" data-page={page} data-locale={locale}>
-  <p class="comments-status" role="status">{t.loading}</p>
-  <ul class="comments-list" hidden></ul>
+  <div class="comments-head">
+    <span class="comments-head-title">{t.title}</span>
+    <span class="comments-head-count" hidden>0</span>
+  </div>
+  <div class="comments-body">
+    <p class="comments-status" role="status">{t.loading}</p>
+    <ul class="comments-list" hidden></ul>
 
-  <form class="comments-form">
-    <label>
-      <span>{t.nameLabel}</span>
-      <input type="text" name="author" placeholder={t.namePlaceholder} maxlength="60" autocomplete="off" />
-    </label>
-    <label>
-      <span>{t.bodyLabel}</span>
-      <textarea name="body" required maxlength="2000" rows="4" placeholder={t.bodyPlaceholder}></textarea>
-    </label>
-    {turnstileSiteKey && <div class="cf-turnstile" data-sitekey={turnstileSiteKey} />}
-    <p class="comments-form-error" role="alert" hidden></p>
-    <button type="submit">{t.submit}</button>
-  </form>
+    <form class="comments-form">
+      <label>
+        <span>{t.nameLabel}</span>
+        <input type="text" name="author" placeholder={t.namePlaceholder} maxlength="60" autocomplete="off" />
+      </label>
+      <label>
+        <span>{t.bodyLabel}</span>
+        <textarea name="body" required maxlength="2000" rows="4" placeholder={t.bodyPlaceholder}></textarea>
+      </label>
+      {turnstileSiteKey && <div class="cf-turnstile" data-sitekey={turnstileSiteKey} />}
+      <p class="comments-form-error" role="alert" hidden></p>
+      <button type="submit">{t.submit}</button>
+    </form>
+  </div>
 </div>
 
 {turnstileSiteKey && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
@@ -43,6 +49,7 @@ const turnstileSiteKey = '0x4AAAAAAEtXFgBnziV68VEm';
     const locale = root.dataset.locale;
     const status = root.querySelector('.comments-status');
     const list = root.querySelector('.comments-list');
+    const headCount = root.querySelector('.comments-head-count');
     const form = root.querySelector('.comments-form');
     const formError = root.querySelector('.comments-form-error');
     const submitButton = form.querySelector('button[type="submit"]');
@@ -55,7 +62,9 @@ const turnstileSiteKey = '0x4AAAAAAEtXFgBnziV68VEm';
       // D1 的 datetime('now') 存的是「YYYY-MM-DD HH:MM:SS」，沒有 T 也沒有時區。
       // 沒有 T 的字串在部分瀏覽器會被當成本地時間解析，不是 UTC，換成 ISO 格式再交給 Date。
       const postedAt = new Date(comment.created_at.replace(' ', 'T') + 'Z');
-      meta.textContent = `${comment.author || i18n.anonymous} · ${postedAt.toLocaleDateString('zh-TW')}`;
+      const authorEl = document.createElement('b');
+      authorEl.textContent = comment.author || i18n.anonymous;
+      meta.append(authorEl, ` · ${postedAt.toLocaleDateString('zh-TW')}`);
 
       const body = document.createElement('p');
       // 留言一律當純文字渲染，不解析 HTML，避免留言內容被當成標記執行。
@@ -71,6 +80,9 @@ const turnstileSiteKey = '0x4AAAAAAEtXFgBnziV68VEm';
         if (!res.ok) throw new Error('load failed');
         const data = await res.json();
         const comments = data.comments ?? [];
+
+        headCount.textContent = String(comments.length);
+        headCount.hidden = false;
 
         if (comments.length === 0) {
           status.textContent = i18n.empty;
@@ -147,14 +159,27 @@ const turnstileSiteKey = '0x4AAAAAAEtXFgBnziV68VEm';
 </script>
 
 <style>
-  .comments { margin-top: 24px; }
-  .comments-status { color: var(--text-dim); font-size: var(--fs-xs); }
-  .comments-list { list-style: none; margin: 0 0 28px; padding: 0; display: flex; flex-direction: column; gap: 16px; }
-  .comments-list li {
-    border: 1px solid var(--border); border-radius: 12px;
-    padding: 14px 16px; background: var(--bg-card);
+  .comments {
+    margin-top: 24px; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
   }
+  .comments-head {
+    background: var(--accent-bg); padding: 12px 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .comments-head-title { font-size: var(--fs-2xs); font-weight: 500; color: var(--text); }
+  .comments-head-count {
+    font-size: var(--fs-3xs); color: var(--accent); background: var(--bg-card);
+    border-radius: 20px; padding: 2px 10px;
+  }
+  .comments-body { padding: 18px 20px 20px; }
+  .comments-status { color: var(--text-dim); font-size: var(--fs-xs); }
+  .comments-list { list-style: none; margin: 0 0 24px; padding: 0; }
+  .comments-list li { padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .comments-list li:first-child { padding-top: 0; }
+  .comments-list li:last-child { border-bottom: none; padding-bottom: 0; }
   .comments-item-meta { font-size: var(--fs-3xs); color: var(--text-dim); margin-bottom: 6px; }
+  .comments-item-meta b { color: var(--text); font-weight: 500; }
   .comments-list p { margin: 0; font-size: var(--fs-xs); line-height: 1.75; color: var(--text); white-space: pre-wrap; }
 
   .comments-form { display: flex; flex-direction: column; gap: 14px; max-width: 480px; }

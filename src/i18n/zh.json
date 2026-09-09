@@ -28,6 +28,7 @@
   "expandLabel": "看完整說明",
   "collapseLabel": "收合說明",
   "comments": {
+    "title": "留言",
     "nameLabel": "暱稱",
     "namePlaceholder": "可留空，留空會顯示為匿名",
     "bodyLabel": "留言內容",

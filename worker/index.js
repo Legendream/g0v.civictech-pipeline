@@ -24,14 +24,14 @@ function json(data, status = 200) {
 }
 
 async function verifyTurnstile(token, secret) {
-  if (!token || !secret) return { success: false, errorCodes: ['missing-token-or-secret'] };
+  if (!token || !secret) return false;
   const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ secret, response: token }),
   });
   const result = await res.json();
-  return { success: result.success === true, errorCodes: result['error-codes'] ?? [] };
+  return result.success === true;
 }
 
 async function handleGet(url, env) {
@@ -71,10 +71,9 @@ async function handlePost(request, env) {
     return json({ error: '留言內容過長' }, 400);
   }
 
-  const turnstileResult = await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET_KEY);
-  if (!turnstileResult.success) {
-    // TODO 除錯用，問題排除後拿掉 errorCodes，只留通用錯誤訊息。
-    return json({ error: '機器人驗證未通過', errorCodes: turnstileResult.errorCodes }, 403);
+  const passedTurnstile = await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET_KEY);
+  if (!passedTurnstile) {
+    return json({ error: '機器人驗證未通過' }, 403);
   }
 
   const trimmedAuthor =
@@ -99,14 +98,6 @@ export default {
       return json({ error: 'method not allowed' }, 405);
     }
 
-    // TODO 除錯用，問題排除後整段拿掉。只回報有沒有讀到值、長度多少，不洩漏內容本身。
-    if (url.pathname === '/api/debug-env') {
-      const secret = env.TURNSTILE_SECRET_KEY;
-      return json({
-        hasSecret: typeof secret === 'string' && secret.length > 0,
-        secretLength: typeof secret === 'string' ? secret.length : 0,
-      });
-    }
 
     return env.ASSETS.fetch(request);
   },

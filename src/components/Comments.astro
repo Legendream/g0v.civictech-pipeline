@@ -124,6 +124,9 @@ const turnstileSiteKey = '0x4AAAAAAEtXFgBnziV68VEm';
           // 用跟「還沒驗證」不同的文字，不然兩種狀態分不出來。
           formError.textContent = res.status === 403 ? i18n.verifyFailedError : i18n.submitError;
           formError.hidden = false;
+          // 驗證碼過期或已使用都會落到這裡，畫面卻停在舊的「成功」勾勾，
+          // 不重置的話使用者再按一次送出還是帶同一個失效的驗證碼。
+          if (res.status === 403 && window.turnstile) window.turnstile.reset();
           return;
         }
 

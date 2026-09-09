@@ -99,6 +99,15 @@ export default {
       return json({ error: 'method not allowed' }, 405);
     }
 
+    // TODO 除錯用，問題排除後整段拿掉。只回報有沒有讀到值、長度多少，不洩漏內容本身。
+    if (url.pathname === '/api/debug-env') {
+      const secret = env.TURNSTILE_SECRET_KEY;
+      return json({
+        hasSecret: typeof secret === 'string' && secret.length > 0,
+        secretLength: typeof secret === 'string' ? secret.length : 0,
+      });
+    }
+
     return env.ASSETS.fetch(request);
   },
 };

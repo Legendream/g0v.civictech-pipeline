@@ -24,14 +24,14 @@ function json(data, status = 200) {
 }
 
 async function verifyTurnstile(token, secret) {
-  if (!token || !secret) return false;
+  if (!token || !secret) return { success: false, errorCodes: ['missing-token-or-secret'] };
   const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ secret, response: token }),
   });
   const result = await res.json();
-  return result.success === true;
+  return { success: result.success === true, errorCodes: result['error-codes'] ?? [] };
 }
 
 async function handleGet(url, env) {
@@ -71,9 +71,10 @@ async function handlePost(request, env) {
     return json({ error: '留言內容過長' }, 400);
   }
 
-  const passedTurnstile = await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET_KEY);
-  if (!passedTurnstile) {
-    return json({ error: '機器人驗證未通過' }, 403);
+  const turnstileResult = await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET_KEY);
+  if (!turnstileResult.success) {
+    // TODO 除錯用，問題排除後拿掉 errorCodes，只留通用錯誤訊息。
+    return json({ error: '機器人驗證未通過', errorCodes: turnstileResult.errorCodes }, 403);
   }
 
   const trimmedAuthor =

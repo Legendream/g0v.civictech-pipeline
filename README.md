@@ -50,10 +50,10 @@ D1 資料庫，並載入 Cloudflare Turnstile 判斷留言是不是機器人送�
 
 深色模式預設跟隨系統，另有手動切換鈕，選擇存在瀏覽器本機。
 
-**留言區**：程式碼已寫好（`worker/index.js` 處理 `/api/comments`，
-`src/components/Comments.astro` 是前端），但 D1 資料庫與 Turnstile 金鑰要用
-Cloudflare 帳號手動建立，設定步驟見 `docs/部署設定.md`。設定完成前，
-留言表單看得到但送不出去。
+**留言區**：2026-09-09 已上線，只在 about 頁（`worker/index.js` 處理
+`/api/comments`，`src/components/Comments.astro` 是前端）。送出即公開，
+沒有管理後台，下架或刪除靠 Cloudflare 後台的 D1 Studio 直接改資料，
+步驟見 `docs/部署設定.md`。
 
 ## 語言
 
@@ -68,5 +68,5 @@ Cloudflare 帳號手動建立，設定步驟見 `docs/部署設定.md`。設定�
 - 不直接 commit 到 `main`。每次改動先開分支，開 PR，由 Claire merge
 - 動手前先寫驗收條件，放在 `docs/站①驗收條件_*.md`
 - 一批 PR 只做一個目的
-- 分支推上去 Cloudflare 就會產生預覽網址，需要跑起來才驗得到的東西在預覽網址上驗，
-  不要把 merge 當成自己的除錯步驟
+- 這個站部署在 Cloudflare Workers，**沒有分支隔離的預覽環境**：推分支或在
+  後台編輯設定都可能直接影響正式網域，細節見 `docs/部署設定.md`

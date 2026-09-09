@@ -5,10 +5,12 @@ import { getStrings } from '../i18n/index.js';
 
 const { page, locale = 'zh' } = Astro.props;
 const t = getStrings(locale).comments;
-// 部署設定.md 記著這個變數要在 Cloudflare 的 Build 環境變數裡設。
-// 還沒設之前（例如本機開發、或還沒做批次三的後台設定），乾脆不畫 Turnstile 元件，
-// 不然 Turnstile 的腳本會因為空字串的 sitekey 丟出未捕捉的錯誤。
-const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+// Site key 是公開資訊（本來就會印在頁面的 data-sitekey 屬性裡），
+// Cloudflare Workers Builds 的 Git 建置流程沒有提供建置期環境變數可用，
+// 試過會發現 Astro 建置時讀不到後台設的變數，所以直接寫死在這裡，
+// 不用環境變數繞一手。Secret key 不受影響，那個只在 worker/index.js 的
+// 執行期讀 env.TURNSTILE_SECRET_KEY，不會出現在任何前端程式碼裡。
+const turnstileSiteKey = '0x4AAAAAAEtXFgBnziV68VEm';
 ---
 <div class="comments" data-page={page} data-locale={locale}>
   <p class="comments-status" role="status">{t.loading}</p>

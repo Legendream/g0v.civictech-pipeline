@@ -40,6 +40,7 @@
     "bodyRequiredError": "留言內容不能是空的。",
     "submitError": "送出失敗，稍後再試一次。",
     "verifyError": "機器人驗證還沒完成，請稍候或重新整理頁面再試。",
+    "verifyFailedError": "機器人驗證失敗，請重新整理頁面再試一次。",
     "anonymous": "匿名"
   }
 }

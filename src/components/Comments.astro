@@ -121,7 +121,8 @@ const turnstileSiteKey = '0x4AAAAAAEtXFgBnziV68VEm';
         });
         if (!res.ok) {
           // 403 只會是 Turnstile 沒過關（見 worker/index.js），其餘一律當成通用送出失敗。
-          formError.textContent = res.status === 403 ? i18n.verifyError : i18n.submitError;
+          // 用跟「還沒驗證」不同的文字，不然兩種狀態分不出來。
+          formError.textContent = res.status === 403 ? i18n.verifyFailedError : i18n.submitError;
           formError.hidden = false;
           return;
         }

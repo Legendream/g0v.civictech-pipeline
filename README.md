@@ -40,7 +40,9 @@ Astro 產生靜態頁，部署在 Cloudflare Workers（靜態檔由 Workers 直�
 後台那幾格設定與踩過的坑寫在 `docs/部署設定.md`，改部署相關的東西之前先讀那份。
 
 正文是靜態 HTML，不靠 JavaScript 才長得出來——這個站自己在教別人
-「你的文章要讓機器人拿得到字」，自己就得做到。全站不載入任何第三方資源。
+「你的文章要讓機器人拿得到字」，自己就得做到。全站不載入任何第三方資源，
+唯一例外是 about 頁的留言區：它呼叫 `worker/index.js` 這支自己寫的程式與
+D1 資料庫，並載入 Cloudflare Turnstile 判斷留言是不是機器人送的。
 
 內容檔一頁一個 `.mdx`，放在 `src/pages/<語言>/`，檔名即網址。
 正文照樣用 Markdown 寫，需要卡片、圖表、時間軸的地方才插 `src/components/` 的元件。
@@ -48,7 +50,10 @@ Astro 產生靜態頁，部署在 Cloudflare Workers（靜態檔由 Workers 直�
 
 深色模式預設跟隨系統，另有手動切換鈕，選擇存在瀏覽器本機。
 
-**還沒做**：留言區。規劃用 D1 加 Turnstile，資料表結構已先寫在 `db/schema.sql`。
+**留言區**：程式碼已寫好（`worker/index.js` 處理 `/api/comments`，
+`src/components/Comments.astro` 是前端），但 D1 資料庫與 Turnstile 金鑰要用
+Cloudflare 帳號手動建立，設定步驟見 `docs/部署設定.md`。設定完成前，
+留言表單看得到但送不出去。
 
 ## 語言
 

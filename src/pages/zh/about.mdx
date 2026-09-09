@@ -4,6 +4,7 @@ title: 關於這個網站
 description: 專案發起背景、合作夥伴、CC BY 4.0 開源授權聲明與原始碼正本位置。
 ---
 import Section from '../../components/Section.astro';
+import Comments from '../../components/Comments.astro';
 
 export const sections = [
   { id: 'partners', icon: 'people', title: '專案發起與合作夥伴', tone: 'plain' },
@@ -56,20 +57,30 @@ CC BY 4.0, by g0v jothon & Claire Cheng
 
 <Section {...sections[3]}>
 
-- 本站為純靜態網頁，不載入任何第三方追蹤碼或分析工具。
-- 專案架構預留多語系擴充空間，未完成翻譯之語言頁面不會出現在導覽列中。
+本站落實「隱私為先（Privacy by Design）」與極簡架構原則，技術設計透明如下：
+
+* 全站正文皆為伺服器端預先產生的純靜態 HTML，不載入任何第三方追蹤代碼、廣告像素或行為分析工具。
+* 下方留言區為全站唯一的動態互動模組，由本專案獨立開發之輕量程式與資料庫驅動，無任何外部第三方留言服務介入。
+* 人機驗證採用 Cloudflare Turnstile，僅用於防範垃圾訊息與自動化攻擊，絕不蒐集或追蹤個人瀏覽歷程。
+* 專案架構已預留多語系擴充機制，為確保閱讀體驗，尚未完成翻譯校對的語系頁面暫不列入導覽列。
 
 </Section>
 
 <Section {...sections[4]}>
 
-留言區還沒上線，排在下一批做。在那之前，回報問題請到對應的地方開一則議題（issue，GitHub 上用來記錄問題與建議的功能，需要一個 GitHub 帳號）：
+歡迎在此提出流程卡點、疑問，或分享你的實作文章：
 
-- **這個網站本身**：錯字、連結壞掉、讀不懂的段落 → [開在網站這裡](https://github.com/Legendream/g0v.civictech-pipeline/issues)
+* **免註冊與隱私**：暱稱可留空（以匿名發布），僅內容必填。資料存於本站自建資料庫，無第三方轉發、不記錄 IP。
+* **公開守則**：留言送出後即時公開，請勿填寫個資；廣告、人身攻擊與違法內容將予下架。
+* **留言撤回**：若需刪除留言，請至 [GitHub Issues](https://github.com/Legendream/g0v.civictech-pipeline/issues) 附上留言內容與送出時間，我們會協助移除。
+
+<Comments page="about" locale="zh" />
+
+不想留言、或問題不是關於這一頁的，也可以開一則議題（issue，GitHub 上用來記錄問題與建議的功能，需要一個 GitHub 帳號）：
+
+- **這個網站本身**：錯字、連結壞掉、讀不懂的段落（不限這一頁，五頁都算）→ [開在網站這裡](https://github.com/Legendream/g0v.civictech-pipeline/issues)
 - **問卷研究**：數字、圖表、分析方法 → [開在研究報告這裡](https://github.com/Legendream/Taiwan-civic-tech-research/issues)
 - **寫作流程**：步驟不清楚、規則互相衝突、想加的功能 → [開在寫作流程這裡](https://github.com/Legendream/AI-Writing-Skill/issues)
-
-留言區做好之後，這一頁就能直接留言，不需要任何帳號。留言政策會跟留言區一起公開。
 
 </Section>
 

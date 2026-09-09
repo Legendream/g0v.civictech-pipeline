@@ -1,12 +1,17 @@
 {
   // Cloudflare Workers 的部署設定。
-  // 這個站是純靜態的：Astro 把五頁 build 成 HTML 放進 dist/，
-  // Workers 只負責把 dist/ 裡的檔案送出去，沒有伺服器端程式。
+  // 五頁正文仍然是 Astro 建置出來的純靜態 HTML；"main" 指到的 worker/index.js
+  // 只處理 /api/comments 這一條路徑，其餘請求原封不動交給靜態資源（見 worker/index.js）。
   //
   // 這個名字必須跟 Cloudflare 上那個 Worker 的名字一模一樣，
   // 否則 wrangler deploy 會另外生一個新的 Worker 出來。
   // Worker 建立之後改不了名，所以這裡也不要動。
   "name": "g0v-civictech-pipeline",
+
+  // 留言區的後端程式。沒有這個 worker/index.js 之前，assets 是唯一的處理者；
+  // 加上它之後，靜態資源仍然優先比對（run_worker_first 預設 false），
+  // 只有比對不到檔案的請求（例如 /api/comments）才會進到這支程式。
+  "main": "./worker/index.js",
 
   // 決定這個 Worker 用哪一版的執行環境。往後調會拿到新行為，
   // 沒事不要動；要動請確認過那一版的變更說明。
@@ -24,9 +29,23 @@
 
     // 找不到的網址回傳 404.html（由 src/pages/404.md 產生），
     // 而不是丟一頁 Cloudflare 的預設錯誤畫面。
-    "not_found_handling": "404-page"
-  }
+    "not_found_handling": "404-page",
 
-  // 批次三加留言區時，D1 的 binding 加在這裡。
-  // 資料表結構已經先寫在 db/schema.sql。
+    // worker/index.js 用 env.ASSETS.fetch(request) 把非 /api/ 的請求轉給靜態資源，
+    // 這個 binding 名稱要跟程式碼裡的 env.ASSETS 對上。
+    "binding": "ASSETS"
+  },
+
+  // 留言資料表的 D1 binding。database_id 是佔位值，
+  // 跑過 `wrangler d1 create g0v-civictech-comments` 之後，
+  // 把指令印出來的真正 id 貼進來取代下面這行。
+  // 資料表結構在 db/schema.sql，要另外用
+  // `wrangler d1 execute g0v-civictech-comments --remote --file=./db/schema.sql` 套用。
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "g0v-civictech-comments",
+      "database_id": "4d7a9ce0-8834-4ecb-996d-f15f8f76c063"
+    }
+  ]
 }

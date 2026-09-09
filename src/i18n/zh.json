@@ -26,5 +26,22 @@
   "themeToDark": "切換成暗色",
   "themeToLight": "切換成亮色",
   "expandLabel": "看完整說明",
-  "collapseLabel": "收合說明"
+  "collapseLabel": "收合說明",
+  "comments": {
+    "title": "留言",
+    "nameLabel": "暱稱",
+    "namePlaceholder": "可留空，留空會顯示為匿名",
+    "bodyLabel": "留言內容",
+    "bodyPlaceholder": "寫下你卡住的地方、想問的問題，或是你的文章連結",
+    "submit": "送出留言",
+    "submitting": "送出中…",
+    "loading": "留言載入中…",
+    "empty": "尚無留言，歡迎留下第一則回饋。",
+    "loadError": "留言載入失敗，重新整理頁面再試一次。",
+    "bodyRequiredError": "留言內容不能是空的。",
+    "submitError": "送出失敗，稍後再試一次。",
+    "verifyError": "機器人驗證還沒完成，請稍候或重新整理頁面再試。",
+    "verifyFailedError": "機器人驗證失敗，請重新整理頁面再試一次。",
+    "anonymous": "匿名"
+  }
 }

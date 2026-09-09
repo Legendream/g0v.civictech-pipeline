@@ -1,4 +1,4 @@
-# 臺灣公民科技行動指引網站
+# 臺灣公民科技經驗寫作流程網站
 
 ⚠️ **這個 repo 是公開的**（`github.com/Legendream/g0v.civictech-pipeline`）。
 commit 就是發布，而且留在 git 歷史裡清不掉。

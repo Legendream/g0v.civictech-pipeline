@@ -12,7 +12,7 @@ import Faq from '../../components/Faq.astro';
 
 export const sections = [
   { id: 'checklist', icon: 'checklist', title: '開始前的準備清單', nav: '準備清單', tone: 'accent' },
-  { id: 'matrix', icon: 'grid', title: '各工具的安裝方式', nav: '安裝方式', tone: 'plain' },
+  { id: 'matrix', icon: 'grid', title: '在哪裡使用', nav: '在哪裡使用', tone: 'plain' },
   { id: 'paths', icon: 'route', title: '選擇你的上手路徑', nav: '上手路徑', tone: 'accent' },
   { id: 'verify', icon: 'verify', title: '如何驗證流程已正確載入', nav: '驗證載入', tone: 'plain' },
   { id: 'faq', icon: 'chat', title: '常見問題', nav: '常見問題', tone: 'accent' },
@@ -29,7 +29,7 @@ export const sections = [
 <Section {...sections[0]}>
 
 <CardGrid cols={2}>
-  <Card title="AI 工具環境">claude.ai 或一個裝得起來的 AI 工具（參見下方安裝方式）。</Card>
+  <Card title="AI agent">任何能載入 skill 的 AI agent。</Card>
   <Card title="專案素材">相關連結、文件、訪談筆記或會議紀錄（先備妥即可，無需事先閱讀完畢）。</Card>
   <Card title="目標讀者設定">明確定義文章是寫給內行提案者還是初次接觸的大眾。</Card>
   <Card title="風格參考（選填）">你滿意的過往文章或參考範文；若未提供，將採用預設的客觀平實語氣。</Card>
@@ -39,11 +39,7 @@ export const sections = [
 
 <Section {...sections[1]}>
 
-| 工具類別 | 推薦安裝方式 |
-|---|---|
-| **claude.ai**（Pro 以上） | 下載壓縮檔並上傳至自訂 Skills |
-| **Antigravity** | 下載專案資料夾並直接指定 SKILL 路徑 |
-| **Claude Code** | 指定 SKILL 路徑載入 |
+這是一份 skill，任何 AI agent 都可以使用。我主要用 Claude Code，在上面使用體驗比較好。
 
 </Section>
 
@@ -96,7 +92,7 @@ AI 本來就會主動提問，就算完全沒載入成功，它也能順暢對�
     實務測試顯示，負責產製草稿的 AI 容易產生盲點。AI 自己來回檢查了四輪，交出來由沒看過草稿過程的獨立 AI 驗收，還是找得出要修的地方。因此，流程強制在第 ⑥ 站使用乾淨對話的獨立 AI，僅輸入「驗收清單」與「文章成品」進行客觀挑錯。
   </Faq>
   <Faq q="我用 ChatGPT 或 Gemini，可以用這套嗎？">
-    只要是 AI 代理人，都可以使用這個 Skill，但我無法確保品質和 Claude Code 一樣，歡迎大家給我回饋意見。
+    可以。只要是 AI agent 都能用，但我無法確保品質和 Claude Code 一樣，歡迎給我回饋。
   </Faq>
   <Faq q="實際用起來像什麼？">
     像一人編輯站。把它當編輯用：留時間跟它討論，也留時間查證。包含三件事：開頭是一輪問答；時間主要花在事實查證；AI 自己檢查過的文章仍需交由獨立眼睛挑錯。

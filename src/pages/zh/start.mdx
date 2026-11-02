@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/Base.astro
 title: 怎麼開始
-description: 兩條上手路徑、怎麼確認裝對了，以及換一個 AI 工具會怎樣。
+description: 兩種開始方式、怎麼確認載入成功，以及常見問題。
 ---
 import Section from '../../components/Section.astro';
 import ScrollNav from '../../components/ScrollNav.astro';
@@ -11,10 +11,10 @@ import Stack from '../../components/Stack.astro';
 import Faq from '../../components/Faq.astro';
 
 export const sections = [
-  { id: 'checklist', icon: 'checklist', title: '開始前的準備清單', nav: '準備清單', tone: 'accent' },
+  { id: 'checklist', icon: 'checklist', title: '開始前要準備什麼', nav: '準備', tone: 'accent' },
   { id: 'matrix', icon: 'grid', title: '在哪裡使用', nav: '在哪裡使用', tone: 'plain' },
-  { id: 'paths', icon: 'route', title: '選擇你的上手路徑', nav: '上手路徑', tone: 'accent' },
-  { id: 'verify', icon: 'verify', title: '如何驗證流程已正確載入', nav: '驗證載入', tone: 'plain' },
+  { id: 'paths', icon: 'route', title: '選一種方式開始', nav: '開始方式', tone: 'accent' },
+  { id: 'verify', icon: 'verify', title: '怎麼確認載入成功', nav: '確認載入', tone: 'plain' },
   { id: 'faq', icon: 'chat', title: '常見問題', nav: '常見問題', tone: 'accent' },
 ];
 
@@ -22,41 +22,42 @@ export const sections = [
 
 <Section tone="plain" first>
 
-# 快速開始
+# 怎麼開始
+
+準備素材，選一種方式，就能開始寫第一篇。
 
 </Section>
 
 <Section {...sections[0]}>
 
-<CardGrid cols={2}>
-  <Card title="AI agent">任何能載入 skill 的 AI agent。</Card>
-  <Card title="專案素材">相關連結、文件、訪談筆記或會議紀錄（先備妥即可，無需事先閱讀完畢）。</Card>
-  <Card title="目標讀者設定">明確定義文章是寫給內行提案者還是初次接觸的大眾。</Card>
-  <Card title="風格參考（選填）">你滿意的過往文章或參考範文；若未提供，將採用預設的客觀平實語氣。</Card>
+<CardGrid cols={3}>
+  <Card title="專案素材">相關連結、文件、訪談筆記或會議紀錄。不用事先讀完。</Card>
+  <Card title="目標讀者">想清楚文章要寫給內行提案者，還是初次接觸的大眾。</Card>
+  <Card title="風格參考（選填）">你滿意的過往文章或範文。沒有的話，會採用預設的客觀平實語氣。</Card>
 </CardGrid>
 
 </Section>
 
 <Section {...sections[1]}>
 
-這是一份 skill，任何 AI agent 都可以使用。我主要用 Claude Code，在上面使用體驗比較好。
+這是一份 skill，也就是寫給 AI 看的工作步驟。任何 AI agent 都可以使用。AI agent 是能讀取你的檔案、照步驟把工作做完的 AI 工具，例如 Claude Code、Antigravity。我主要用 Claude Code，在上面使用體驗比較好。
 
 </Section>
 
 <Section {...sections[2]}>
 
-### 路徑 A：瀏覽器直接使用（免安裝程式）
+沒用過終端機，而且有 claude.ai Pro 付費方案，請選方式一。素材很多、都存在電腦裡，請選方式二。
 
-無需安裝程式環境，全程於瀏覽器操作：
+### 方式一：在瀏覽器使用（不用安裝程式）
 
 1. **檢查環境設定**：確認使用 claude.ai Pro 方案，並至 [Capabilities 設定頁](https://claude.ai/settings/capabilities) 開啟「Code execution and file creation」。
 2. **下載 Skill 壓縮檔**：下載最新版本 [civic-tech-writing-pipeline.zip](https://github.com/Legendream/AI-Writing-Skill/releases/latest/download/civic-tech-writing-pipeline.zip)（此連結會自動指向最新穩定版）。
 3. **上傳至 claude.ai**：進入 [Skills 設定頁面](https://claude.ai/customize/skills)，上傳下載的 zip 壓縮檔。
 4. **啟動協作**：開啟新對話，輸入「我想寫一篇公民科技相關的文章」即可開始。
 
-### 路徑 B：本機開發者路徑（適合習慣終端機的使用者）
+### 方式二：在自己的電腦使用（適合習慣終端機的人）
 
-直接載入專案資料夾，方便讀取本機大量素材：
+這個方式可以直接讀取電腦裡的大量素材。
 
 1. **抓取專案檔案**：在終端機執行或請 AI 助理下載：
    ```bash
@@ -72,33 +73,26 @@ export const sections = [
 
 <Section {...sections[3]}>
 
-啟動新對話後，AI 會詢問主題範圍、現有素材與文章文體。
-
-AI 本來就會主動提問，就算完全沒載入成功，它也能順暢對話，因此**不能把「AI 有問問題」當作載入成功的判準**。
-
-**關鍵判斷指標**：檢視 AI 每輪回覆的**最後一行是否以「下一站：」開頭**（例如：`下一站：素材盤點`）。這是本流程的核心狀態信號。
+AI 每輪回覆的最後一行如果以「下一站：」開頭（例如：`下一站：素材盤點`），就代表載入成功。
 
 ### 沒看到「下一站：」怎麼辦？
 
-- **路徑 A（瀏覽器）**：回頭確認 zip 壓縮檔是否確實上傳成功，且 Capabilities 設定已開啟 Code execution。
-- **路徑 B（本機）**：請 AI「先把 `civic-tech-writing-pipeline/SKILL.md` 開頭那段唸給我聽」，唸不出來代表讀取路徑不正確。
+- **方式一（瀏覽器）**：確認 zip 壓縮檔已上傳成功，且 Capabilities 設定已開啟 Code execution。
+- **方式二（自己的電腦）**：請 AI「先把 `civic-tech-writing-pipeline/SKILL.md` 開頭那段唸給我聽」。唸不出來，代表讀取路徑不正確。
 
 </Section>
 
 <Section {...sections[4]} last>
 
 <Stack>
-  <Faq q="為什麼交付前必須由獨立 AI 驗收？">
-    實務測試顯示，負責產製草稿的 AI 容易產生盲點。AI 自己來回檢查了四輪，交出來由沒看過草稿過程的獨立 AI 驗收，還是找得出要修的地方。因此，流程強制在第 ⑥ 站使用乾淨對話的獨立 AI，僅輸入「驗收清單」與「文章成品」進行客觀挑錯。
-  </Faq>
   <Faq q="我用 ChatGPT 或 Gemini，可以用這套嗎？">
     可以。只要是 AI agent 都能用，但我無法確保品質和 Claude Code 一樣，歡迎給我回饋。
   </Faq>
   <Faq q="實際用起來像什麼？">
-    像一人編輯站。把它當編輯用：留時間跟它討論，也留時間查證。包含三件事：開頭是一輪問答；時間主要花在事實查證；AI 自己檢查過的文章仍需交由獨立眼睛挑錯。
+    像一人編輯站。把它當編輯用：留時間跟它討論，也留時間查證。開頭會先有一輪問答，之後的時間主要花在查證事實。
   </Faq>
   <Faq q="撰寫完成後可以發布在哪裡？">
-    本流程產出的 11 篇公民科技行動指引已收錄於[台灣公民科技資料庫](https://civictech.tw/#know-how)。你自己完成的文章可發布於個人的 Medium、Substack、HackMD 或社群共筆；發布後可自行將連結加入 [g0v 行動指引索引](https://g0v.hackmd.io/@jothon/guide)。
+    你可以發布在個人的 Medium、Substack、HackMD 或社群共筆，再把連結加入 [g0v 行動指引索引](https://g0v.hackmd.io/@jothon/guide)。
   </Faq>
 </Stack>
 

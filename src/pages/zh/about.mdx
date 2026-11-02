@@ -9,29 +9,26 @@ import Comments from '../../components/Comments.astro';
 export const sections = [
   { id: 'partners', icon: 'people', title: '專案發起與合作夥伴', tone: 'plain' },
   { id: 'licence', icon: 'scale', title: '開源授權條款', tone: 'accent' },
-  { id: 'sources', icon: 'doc', title: '原始資料與正本倉庫', tone: 'plain' },
-  { id: 'privacy', icon: 'lock', title: '網站架構與隱私設計', tone: 'accent' },
+  { id: 'sources', icon: 'doc', title: '完整內容放在哪裡', tone: 'plain' },
+  { id: 'privacy', icon: 'lock', title: '隱私', tone: 'accent' },
   { id: 'feedback', icon: 'mail', title: '意見回饋與提問', tone: 'plain' },
-  { id: 'freshness', icon: 'clock', title: '內容時效與版本演化', tone: 'accent' },
 ];
 
 <Section {...sections[0]} first>
 
 <Fragment slot="lead">
-# 關於本專案
+# 關於這個網站
 </Fragment>
 
-本專案由 g0v 揪松團與 Claire Cheng 共同合作推動，屬於「臺灣公民科技專案與工具行動指引」專案成果，問卷研究與寫作流程皆由[鄭婷宇（Claire Cheng）](https://claire-cheng.com/zh)執行。
-
-專案包含兩大核心成果：前半段為社群參與現況問卷研究，後半段為標準化的人機協同寫作流程。兩者之關聯與研究發現詳見[為什麼要做這個](/zh/why/)。
+這個專案由 g0v 揪松團與 Claire Cheng 合作推動，是「臺灣公民科技專案與工具行動指引」的成果。問卷研究與寫作流程由[鄭婷宇（Claire Cheng）](https://claire-cheng.com/zh)執行。研究與流程的關聯請看[為什麼要做這個](/zh/why/)。
 
 </Section>
 
 <Section {...sections[1]}>
 
-本套協作流程以 **CC BY 4.0（姓名標示 4.0 國際）** 授權條款釋出，由 g0v 揪松團與 Claire Cheng 共同支持產製。
+這套流程以 **CC BY 4.0（姓名標示 4.0 國際）** 授權釋出。
 
-使用、修改或散布本專案內容時，請標註：
+使用、修改或散布時，請標註：
 
 ```text
 CC BY 4.0, by g0v jothon & Claire Cheng
@@ -43,49 +40,32 @@ CC BY 4.0, by g0v jothon & Claire Cheng
 
 <Section {...sections[2]}>
 
-為確保資訊同步並避免版本分歧，本網站僅提供導讀與結構指引。各項原始內容請查閱對應官方倉庫：
+本站只提供導讀，完整內容請看以下來源：
 
-| 內容項目 | 官方正本倉庫 |
+| 內容 | 位置 |
 |---|---|
 | 本網站原始碼 | [g0v.civictech-pipeline](https://github.com/Legendream/g0v.civictech-pipeline) |
 | 研究報告、分析程式與圖表資料 | [Taiwan-civic-tech-research](https://github.com/Legendream/Taiwan-civic-tech-research)（網頁版：[report.claire-cheng.com](https://report.claire-cheng.com/)） |
-| 寫作流程本體、範本與驗收清單 | [AI-Writing-Skill](https://github.com/Legendream/AI-Writing-Skill) |
+| 寫作流程、範本與驗收清單 | [AI-Writing-Skill](https://github.com/Legendream/AI-Writing-Skill) |
 
-**問卷資料隱私說明**：為保障填答者匿名性，原始問卷填答紀錄不對外公開。由於組織名稱、專案描述、專案階段與困擾評分等欄位組合後，在規模較小的公民科技社群中仍可能指認出特定個人，因此去識別化後的統計數據與分析程式已公開於研究報告倉庫中；未來可公開之原始資料則由 g0v 揪松團自行評估決定是否發布。
+為保障匿名，原始填答紀錄不公開。移除個人身分資訊後的統計數據與分析程式，公開在研究報告的 GitHub 頁面。
 
 </Section>
 
 <Section {...sections[3]}>
 
-本站落實「隱私為先（Privacy by Design）」與極簡架構原則，技術設計透明如下：
-
-* 全站正文皆為伺服器端預先產生的純靜態 HTML，不載入任何第三方追蹤代碼、廣告像素或行為分析工具。
-* 下方留言區為全站唯一的動態互動模組，由本專案獨立開發之輕量程式與資料庫驅動，無任何外部第三方留言服務介入。
-* 人機驗證採用 Cloudflare Turnstile，僅用於防範垃圾訊息與自動化攻擊，絕不蒐集或追蹤個人瀏覽歷程。
-* 專案架構已預留多語系擴充機制，為確保閱讀體驗，尚未完成翻譯校對的語系頁面暫不列入導覽列。
+本站不使用第三方追蹤或廣告工具，留言不記錄 IP。留言時，Cloudflare Turnstile 會確認你不是機器人。
 
 </Section>
 
-<Section {...sections[4]}>
+<Section {...sections[4]} last>
 
-歡迎在此提出流程卡點、疑問，或分享你的實作文章：
+歡迎提出卡住的地方、疑問，或分享你寫的文章。
 
-* **免註冊與隱私**：暱稱可留空（以匿名發布），僅內容必填。資料存於本站自建資料庫，無第三方轉發、不記錄 IP。
-* **公開守則**：留言送出後即時公開，請勿填寫個資；廣告、人身攻擊與違法內容將予下架。
-* **留言撤回**：若需刪除留言，請至 [GitHub Issues](https://github.com/Legendream/g0v.civictech-pipeline/issues) 附上留言內容與送出時間，我們會協助移除。
+暱稱可留空，只有內容必填。留言送出後會立即公開，請勿填寫個資；廣告、人身攻擊與違法內容會被下架。要刪除留言，請到 [GitHub Issues](https://github.com/Legendream/g0v.civictech-pipeline/issues) 附上留言內容與送出時間。
 
 <Comments page="about" locale="zh" />
 
-不想留言、或問題不是關於這一頁的，也可以開一則議題（issue，GitHub 上用來記錄問題與建議的功能，需要一個 GitHub 帳號）：
-
-- **這個網站本身**：錯字、連結壞掉、讀不懂的段落（不限這一頁，五頁都算）→ [開在網站這裡](https://github.com/Legendream/g0v.civictech-pipeline/issues)
-- **問卷研究**：數字、圖表、分析方法 → [開在研究報告這裡](https://github.com/Legendream/Taiwan-civic-tech-research/issues)
-- **寫作流程**：步驟不清楚、規則互相衝突、想加的功能 → [開在寫作流程這裡](https://github.com/Legendream/AI-Writing-Skill/issues)
-
-</Section>
-
-<Section {...sections[5]} last>
-
-本寫作流程由多篇實務文章產製過程中迭代歸納而成。
+如果你有 GitHub 帳號，也可以到這裡回報問題：[網站](https://github.com/Legendream/g0v.civictech-pipeline/issues)、[問卷研究](https://github.com/Legendream/Taiwan-civic-tech-research/issues)、[寫作流程](https://github.com/Legendream/AI-Writing-Skill/issues)。
 
 </Section>
